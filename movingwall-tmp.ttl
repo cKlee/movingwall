@@ -25,8 +25,8 @@ mwo:numIssues a owl:DatatypeProperty ;
     rdfs:comment "The number of issues that are included in or excluded from the DocumentService." ;
     rdfs:domain dso:DocumentService ;
     rdfs:range xsd:integer .
-mwo:excludedTime a owl:DatatypeProperty ;
-    rdfs:label "excluded time" ;
-    rdfs:comment "A part of the document expressed through a period of time which is excluded from the DocumentService." ;
+mwo:time a owl:DatatypeProperty ;
+    rdfs:label "period of time" ;
+    rdfs:comment "A part of the item expressed through a period of time which is included in or excluded from the DocumentService." ;
     rdfs:domain dso:DocumentService ;
     rdfs:range xsd:duration .
