@@ -15,13 +15,6 @@
     a owl:Ontology ;
     rdfs:label "Moving Wall Ontology (MWO)" .
 
-mwo:excludedTime
-    a owl:DatatypeProperty ;
-    rdfs:comment "A part of the document expressed through a period of time which is excluded from the DocumentService." ;
-    rdfs:domain dso:DocumentService ;
-    rdfs:label "excluded time" ;
-    rdfs:range xsd:duration .
-
 mwo:numIssues
     a owl:DatatypeProperty ;
     rdfs:comment "The number of issues that are included in or excluded from the DocumentService." ;
@@ -35,6 +28,13 @@ mwo:numVolumes
     rdfs:domain dso:DocumentService ;
     rdfs:label "number of volumes" ;
     rdfs:range xsd:integer .
+
+mwo:time
+    a owl:DatatypeProperty ;
+    rdfs:comment "A part of the item expressed through a period of time which is included in or excluded from the DocumentService." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:label "period of time" ;
+    rdfs:range xsd:duration .
 
 dso:DocumentService
     a owl:Class ;
