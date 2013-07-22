@@ -1,0 +1,31 @@
+@prefix mwo: <http://example.org/#> .
+@base        <http://example.org/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix daia: <http://purl.org/ontology/daia/> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dso:  <http://purl.org/ontology/dso#> .
+@prefix ecpo: <http://purl.org/ontology/ecpo#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+<> a owl:Ontology ;
+    rdfs:label "Moving Wall Ontology (MWO)" ;
+    vann:preferredNamespacePrefix "mwo" .
+dso:DocumentService a owl:Class ;
+    rdfs:label "DocumentService" ;
+    rdfs:isDefinedBy <http://purl.org/ontology/dso> .
+mwo:numVolumes a owl:DatatypeProperty ;
+    rdfs:label "number of volumes" ;
+    rdfs:comment "The number of volumes that are included in or excluded from the DocumentService." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range xsd:integer .
+mwo:numIssues a owl:DatatypeProperty ;
+    rdfs:label "number of issues" ;
+    rdfs:comment "The number of issues that are included in or excluded from the DocumentService." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range xsd:integer .
+mwo:excludedTime a owl:DatatypeProperty ;
+    rdfs:label "excluded time" ;
+    rdfs:comment "A part of the document expressed through a period of time which is excluded from the DocumentService." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range xsd:duration .
