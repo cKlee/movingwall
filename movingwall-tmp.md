@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-22 12:37:43 +0200
+% 2013-07-22 12:52:47 +0200
 
 # Introduction
 
@@ -28,6 +28,7 @@ The following namspace prefixes are used to refer to related ontologies:
     @prefix owl:  <http://www.w3.org/2002/07/owl#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix vann: <http://purl.org/vocab/vann/> .
+	@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 
 The Holding Ontology is defined in RDF/Turtle as following:
 
