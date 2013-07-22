@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-22 12:52:47 +0200
+% 2013-07-22 13:33:04 +0200
 
 # Introduction
 
@@ -175,7 +175,6 @@ $librarycopies daia:availableFor [
 
 * ISO 20775
 * [Enumeration and Chronology of Periodicals Ontology] (ECPO).
-* ...
 
 [Document Service Ontology]: http://purl.org/ontology/dso
 [DAIA Ontology]: http://purl.org/ontology/daia
