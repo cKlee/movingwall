@@ -155,7 +155,7 @@ $librarycopies daia:availableFor [
 
 # All issues but within the last two years are available for loan. Given the current year 2001, all issues before 2000 are available for loan.
 $librarycopies daia:availableFor [
-	a dso:Presentation ;
+	a dso:Loan ;
 	mwo:time "-P2Y"^^^xsd:duration
 ] .
 
