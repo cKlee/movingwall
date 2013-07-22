@@ -90,11 +90,11 @@ The number of issues that are included in or excluded from the **DocumentService
 
 [time]: #time
 
-A part of the document expressed through a period of time which is excluded from the **DocumentService**. The period MUST be of the datatype xsd:duration and thus can be positive or negative.
+A part of the item expressed through a period of time which is included in or excluded from the **DocumentService**. The period MUST be of the datatype xsd:duration and thus can be positive or negative.
 
-	mwo:excludedTime a owl:DatatypeProperty ;
-		rdfs:label "excluded time" ;
-		rdfs:comment "A part of the document expressed through a period of time which is excluded from the DocumentService." ;
+	mwo:time a owl:DatatypeProperty ;
+		rdfs:label "period of time" ;
+		rdfs:comment "A part of the item expressed through a period of time which is included in or excluded from the DocumentService." ;
 		rdfs:domain dso:DocumentService ;
 		rdfs:range xsd:duration .
 
