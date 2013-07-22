@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-22 13:38:48 +0200
+% 2013-07-22 16:09:33 +0200
 
 # Introduction
 
@@ -159,7 +159,7 @@ $librarycopies daia:availableFor [
 
 # All issues but within the last two years are available for loan. Given the current year 2001, all issues before 2000 are available for loan.
 $librarycopies daia:availableFor [
-	a dso:Presentation ;
+	a dso:Loan ;
 	mwo:time "-P2Y"^^^xsd:duration
 ] .
 
