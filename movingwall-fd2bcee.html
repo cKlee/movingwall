@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Carsten Klee (ZDB)" />
+  <meta name="date" content="2013-07-22 12:37:43 +0200" />
+  <title>Moving Wall Ontology (</title>
+   <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+  body { font-family: sans-serif; }
+  a { text-decoration: none }
+  a:hover { text-decoration: underline }
+  h1 { font: 170% sans-serif }
+  h1.title { font-size: 200%; font-weight: bold; }
+  h2 { font: 140% sans-serif }
+  h3 { font: 120% sans-serif }
+  dt { font-weight: bold; }
+  h1, h2, h3, h1 a, h2 a, h3 a { color: #005A9C; }
+  table { border-collapse: collapse; }
+  td { border: 1px solid #999; padding: 3px }
+  dl p { margin-top: 0; }
+  dt { margin-top: 0.8em; }
+  dd { margin-left: 1.5em; }
+  ol { margin-bottom: 1em; }
+  table + p { margin-top: 1em; }
+  </style>
+</head>
+<body>
+<a href="https://github.com/cKlee/movingwall/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+<header>
+<h1 class="title">Moving Wall Ontology (</h1>
+<h3 class="author">Carsten Klee (ZDB)</h3>
+<h4 class="date">2013-07-22 12:37:43 +0200</h4>
+</header>
+
+<h1>Table of Contents</h1>
+<nav id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a><ul>
+<li><a href="#status-of-this-document"><span class="toc-section-number">1.1</span> Status of this document</a></li>
+<li><a href="#namespaces-and-ontology"><span class="toc-section-number">1.2</span> Namespaces and Ontology</a></li>
+</ul></li>
+<li><a href="#classes"><span class="toc-section-number">2</span> Classes</a><ul>
+<li><a href="#documentservice"><span class="toc-section-number">2.1</span> DocumentService</a></li>
+</ul></li>
+<li><a href="#properties"><span class="toc-section-number">3</span> Properties</a><ul>
+<li><a href="#numvolumes"><span class="toc-section-number">3.1</span> numVolumes</a></li>
+<li><a href="#numissues"><span class="toc-section-number">3.2</span> numIssues</a></li>
+<li><a href="#time"><span class="toc-section-number">3.3</span> time</a></li>
+</ul></li>
+<li><a href="#examples"><span class="toc-section-number">4</span> Examples</a></li>
+<li><a href="#references"><span class="toc-section-number">5</span> References</a><ul>
+<li><a href="#normative-references"><span class="toc-section-number">5.1</span> Normative References</a></li>
+<li><a href="#informative-references"><span class="toc-section-number">5.2</span> Informative References</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="introduction"><a href="#introduction"><span class="header-section-number">1</span> Introduction</a></h1>
+<p>The <strong>Moving Wall Ontology (MWO)</strong> is a vocabulary to express the retention period of an item for a specific service.</p>
+<a id="Status of this document"></a><h2 id="status-of-this-document"><a href="#status-of-this-document"><span class="header-section-number">1.1</span> Status of this document</a></h2>
+<p>This document is an early draft. <a href="https://github.com/cklee/movingwall/issues">Feedback</a> is welcome!</p>
+<a id="Namespaces and Ontology"></a><h2 id="namespaces-and-ontology"><a href="#namespaces-and-ontology"><span class="header-section-number">1.2</span> Namespaces and Ontology</a></h2>
+<p>The URI namespace of this ontology is … The namespace prefix <code>mwo</code> is recommeded. The URI of this ontology as a whole is …</p>
+<pre><code>@prefix mwo: &lt;http://example.org/#&gt; .
+@base        &lt;http://example.org/&gt; .</code></pre>
+<p>The following namspace prefixes are used to refer to related ontologies:</p>
+<pre><code>@prefix bibo: &lt;http://purl.org/ontology/bibo/&gt; .
+@prefix daia: &lt;http://purl.org/ontology/daia/&gt; .
+@prefix dct:  &lt;http://purl.org/dc/terms/&gt; .
+@prefix dso:  &lt;http://purl.org/ontology/dso#&gt; .
+@prefix ecpo: &lt;http://purl.org/ontology/ecpo#&gt; .
+@prefix owl:  &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix vann: &lt;http://purl.org/vocab/vann/&gt; .
+@prefix xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt; .</code></pre>
+<p>The Holding Ontology is defined in RDF/Turtle as following:</p>
+<pre><code>&lt;&gt; a owl:Ontology ;
+    rdfs:label &quot;Moving Wall Ontology (MWO)&quot; ;
+    vann:preferredNamespacePrefix &quot;mwo&quot; .</code></pre>
+<h1 id="classes"><a href="#classes"><span class="header-section-number">2</span> Classes</a></h1>
+<a id="DocumentService"></a><h2 id="documentservice"><a href="#documentservice"><span class="header-section-number">2.1</span> DocumentService</a></h2>
+<p>A <strong>DocumentService</strong> is a service event that is related to one or more <a href="#document">documents</a>. The service event involves a service provider (e.g.a library) and an optional service consumer (e.g. a library patron). Both service provider and service consumer SHOULD be instances of <a href="#Agent">foaf:Agent</a>. The DocumentService class is defined by the <a href="http://purl.org/ontology/dso">Document Service Ontology</a>.</p>
+<pre><code>dso:DocumentService a owl:Class ;
+    rdfs:label &quot;DocumentService&quot; ;
+    rdfs:isDefinedBy &lt;http://purl.org/ontology/dso&gt; .</code></pre>
+<p>Typical document services within the scope of holdings ontology involve a loan event (<a href="http://purl.org/ontology/dso#Loan">dso:Loan</a>) and a presentation event (<a href="http://purl.org/ontology/dso#Presentation">dso:Presentation</a>). To express the availability of items for selected services, one SHOULD use the properties <a href="http://purl.org/ontology/daia/availableFor">daia:availableFor</a> and <a href="http://purl.org/ontology/daia/unavailableFor">daia:unavailableFor</a> from the <a href="http://purl.org/ontology/daia">DAIA Ontology</a>.</p>
+<h1 id="properties"><a href="#properties"><span class="header-section-number">3</span> Properties</a></h1>
+<a id="numVolumes"></a><h2 id="numvolumes"><a href="#numvolumes"><span class="header-section-number">3.1</span> numVolumes</a></h2>
+<p>The number of volumes that are included in or excluded from the <strong>DocumentService</strong>. The number MUST be of the datatype xsd:integer and thus can be positive or negative.</p>
+<pre><code>mwo:numVolumes a owl:DatatypeProperty ;
+    rdfs:label &quot;number of volumes&quot; ;
+    rdfs:comment &quot;The number of volumes that are included in or excluded from the DocumentService.&quot; ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range xsd:integer .</code></pre>
+<a id="numIssues"></a><h2 id="numissues"><a href="#numissues"><span class="header-section-number">3.2</span> numIssues</a></h2>
+<p>The number of issues that are included in or excluded from the <strong>DocumentService</strong>. The number MUST be of the datatype xsd:integer and thus can be positive or negative.</p>
+<pre><code>mwo:numIssues a owl:DatatypeProperty ;
+    rdfs:label &quot;number of issues&quot; ;
+    rdfs:comment &quot;The number of issues that are included in or excluded from the DocumentService.&quot; ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range xsd:integer .</code></pre>
+<a id="time"></a><h2 id="time"><a href="#time"><span class="header-section-number">3.3</span> time</a></h2>
+<p>A part of the document expressed through a period of time which is excluded from the <strong>DocumentService</strong>. The period MUST be of the datatype xsd:duration and thus can be positive or negative.</p>
+<pre><code>mwo:excludedTime a owl:DatatypeProperty ;
+    rdfs:label &quot;excluded time&quot; ;
+    rdfs:comment &quot;A part of the document expressed through a period of time which is excluded from the DocumentService.&quot; ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range xsd:duration .</code></pre>
+<h1 id="examples"><a href="#examples"><span class="header-section-number">4</span> Examples</a></h1>
+<pre class="example"><code># The series is a document, consisting of multliple volumes
+$series a bibo:Periodical 
+    dcterms:hasPart $volume1, $volume2, $volume3 .
+
+$volume1 a bibo:CollectedDocument ; bibo:volume &quot;1&quot; .
+$volume2 a bibo:CollectedDocument ; bibo:volume &quot;2&quot; .
+$volume3 a bibo:CollectedDocument ; bibo:volume &quot;3&quot; .
+
+# One chapter in Volume 1
+$issue3 a bibo:Document ;
+    dcterms:date &quot;2000&quot;^^dcterms:W3CDTF ;
+    dcterms:isPartOf $volume1 .
+
+# A copy of the full series
+$librarycopies 
+    holding:exemplarOf $series ;
+    holding:heldBy $libray ;
+    ecpo:hasChronology [
+        a ecpo:CurrentChronology ;
+        ecpo:hasBeginVolumeNumbering &quot;1&quot;  ;
+        ecpo:hasBeginIssueNumbering &quot;1&quot;  ;
+        ecpo:hasBeginTemporal &quot;1999&quot; ;
+        dcterms:extent [ rdf:value &quot;9&quot; ]    
+    ] .
+    
+# The latest volume is available for presentation 
+$librarycopies daia:availableFor [
+    a dso:Presentation ;
+    mwo:numVolumes &quot;1&quot;^^xsd:integer
+] .
+
+# All volumes but the last is available for loan 
+$librarycopies daia:availableFor [
+    a dso:Loan ;
+    mwo:numVolumes &quot;-1&quot;^^xsd:integer
+] .
+
+# The latest 10 issues are available for presentation
+$librarycopies daia:availableFor [
+    a dso:Presentation ;
+    mwo:numIssues &quot;10&quot;^^xsd:integer
+] .
+
+# All issues but the latest 10 are available for loan. In this example no issues are currently available for loan because there are only 9 issues in the chronology.
+$librarycopies daia:availableFor [
+    a dso:Loan ;
+    mwo:numIssues &quot;-10&quot;^^xsd:integer
+] .
+
+# The latest two years are available for presentation. Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
+$librarycopies daia:availableFor [
+    a dso:Presentation ;
+    mwo:time &quot;P2Y&quot;^^^xsd:duration
+] .
+
+# All issues but within the last two years are available for loan. Given the current year 2001, all issues before 2000 are available for loan.
+$librarycopies daia:availableFor [
+    a dso:Presentation ;
+    mwo:time &quot;-P2Y&quot;^^^xsd:duration
+] .
+</code></pre>
+<h1 id="references"><a href="#references"><span class="header-section-number">5</span> References</a></h1>
+<a id="Normative References"></a><h2 id="normative-references"><a href="#normative-references"><span class="header-section-number">5.1</span> Normative References</a></h2>
+<p>…</p>
+<a id="Informative References"></a><h2 id="informative-references"><a href="#informative-references"><span class="header-section-number">5.2</span> Informative References</a></h2>
+<ul>
+<li>ISO 20775</li>
+<li><a href="http://purl.org/ontology/ecpo">Enumeration and Chronology of Periodicals Ontology</a> (ECPO).</li>
+<li>…</li>
+</ul>
+</body>
+</html>
