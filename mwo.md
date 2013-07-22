@@ -65,8 +65,7 @@ The number of volumes that are included in or excluded from the **DocumentServic
 
 	mwo:numVolumes a owl:DatatypeProperty ;
 		rdfs:label "number of volumes" ;
-		rdfs:comment "The number of volumes that are included in 
-or excluded from the DocumentService." ;
+		rdfs:comment "The number of volumes that are included in or excluded from the DocumentService." ;
 		rdfs:domain dso:DocumentService ;
 		rdfs:range xsd:integer .
 
@@ -78,8 +77,7 @@ The number of issues that are included in or excluded from the **DocumentService
 
 	mwo:numIssues a owl:DatatypeProperty ;
 		rdfs:label "number of issues" ;
-		rdfs:comment "The number of issues that are included in 
-or excluded from the DocumentService." ;
+		rdfs:comment "The number of issues that are included in or excluded from the DocumentService." ;
 		rdfs:domain dso:DocumentService ;
 		rdfs:range xsd:integer .
 
@@ -109,7 +107,7 @@ $volume3 a bibo:CollectedDocument ; bibo:volume "3" .
 
 # One chapter in Volume 1
 $issue3 a bibo:Document ;
-	dcterms:date "2000"^^dcterms:W3CDTF .
+	dcterms:date "2000"^^dcterms:W3CDTF ;
     dcterms:isPartOf $volume1 .
 
 # A copy of the full series
