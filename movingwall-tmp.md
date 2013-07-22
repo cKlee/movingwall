@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-22 13:33:04 +0200
+% 2013-07-22 13:38:48 +0200
 
 # Introduction
 
