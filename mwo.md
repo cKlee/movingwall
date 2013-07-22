@@ -171,7 +171,6 @@ $librarycopies daia:availableFor [
 
 * ISO 20775
 * [Enumeration and Chronology of Periodicals Ontology] (ECPO).
-* ...
 
 [Document Service Ontology]: http://purl.org/ontology/dso
 [DAIA Ontology]: http://purl.org/ontology/daia
