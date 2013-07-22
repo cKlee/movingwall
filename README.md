@@ -1,4 +1,4 @@
 movingwall
 ==========
 
-An ontology to describe retention period of peridicals
+An ontology to describe retention period of items
