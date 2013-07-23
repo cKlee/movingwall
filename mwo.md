@@ -207,7 +207,7 @@ $librarycopies daia:availableFor [
 
 ## Normative References
 
-...
+....
 
 ## Informative References
 
