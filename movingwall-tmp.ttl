@@ -4,29 +4,37 @@
 @prefix daia: <http://purl.org/ontology/daia/> .
 @prefix dct:  <http://purl.org/dc/terms/> .
 @prefix dso:  <http://purl.org/ontology/dso#> .
+@prefix ssso:  <http://purl.org/ontology/ssso#> .
 @prefix ecpo: <http://purl.org/ontology/ecpo#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
-@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix xs:  <http://www.w3.org/2001/XMLSchema#> .
 <> a owl:Ontology ;
     rdfs:label "Moving Wall Ontology (MWO)" ;
     vann:preferredNamespacePrefix "mwo" .
 dso:DocumentService a owl:Class ;
     rdfs:label "DocumentService" ;
     rdfs:isDefinedBy <http://purl.org/ontology/dso> .
+ssso:ServiceLimitation a owl:Class ;
+    rdfs:label "ServiceLimitation" ;
+    rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
+    
+ssso:limitedBy a owl:ObjectProperty ;
+    rdfs:label "limitedBy" ;
+    rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
 mwo:numVolumes a owl:DatatypeProperty ;
     rdfs:label "number of volumes" ;
-    rdfs:comment "The number of volumes that are included in or excluded from the DocumentService." ;
+    rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
     rdfs:domain dso:DocumentService ;
-    rdfs:range xsd:integer .
+    rdfs:range xs:integer .
 mwo:numIssues a owl:DatatypeProperty ;
     rdfs:label "number of issues" ;
-    rdfs:comment "The number of issues that are included in or excluded from the DocumentService." ;
+    rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
     rdfs:domain dso:DocumentService ;
-    rdfs:range xsd:integer .
-mwo:time a owl:DatatypeProperty ;
+    rdfs:range xs:integer .
+mwo:timePeriod a owl:DatatypeProperty ;
     rdfs:label "period of time" ;
-    rdfs:comment "A part of the item expressed through a period of time which is included in or excluded from the DocumentService." ;
+    rdfs:comment "A limitation to the DocumentService in the form of a period of time." ;
     rdfs:domain dso:DocumentService ;
-    rdfs:range xsd:duration .
+    rdfs:range xs:duration .

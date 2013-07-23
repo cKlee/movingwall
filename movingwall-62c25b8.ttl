@@ -1,0 +1,54 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix mwo: <http://example.org/#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix daia: <http://purl.org/ontology/daia/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dso: <http://purl.org/ontology/dso#> .
+@prefix ssso: <http://purl.org/ontology/ssso#> .
+@prefix ecpo: <http://purl.org/ontology/ecpo#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/>
+    vann:preferredNamespacePrefix "mwo" ;
+    a owl:Ontology ;
+    rdfs:label "Moving Wall Ontology (MWO)" .
+
+mwo:numIssues
+    a owl:DatatypeProperty ;
+    rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:label "number of issues" ;
+    rdfs:range xs:integer .
+
+mwo:numVolumes
+    a owl:DatatypeProperty ;
+    rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:label "number of volumes" ;
+    rdfs:range xs:integer .
+
+mwo:timePeriod
+    a owl:DatatypeProperty ;
+    rdfs:comment "A limitation to the DocumentService in the form of a period of time." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:label "period of time" ;
+    rdfs:range xs:duration .
+
+dso:DocumentService
+    a owl:Class ;
+    rdfs:isDefinedBy <http://purl.org/ontology/dso> ;
+    rdfs:label "DocumentService" .
+
+ssso:ServiceLimitation
+    a owl:Class ;
+    rdfs:isDefinedBy <http://purl.org/ontology/ssso> ;
+    rdfs:label "ServiceLimitation" .
+
+ssso:limitedBy
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy <http://purl.org/ontology/ssso> ;
+    rdfs:label "limitedBy" .
+
