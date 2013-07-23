@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:daia="http://purl.org/ontology/daia/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dso="http://purl.org/ontology/dso#" xmlns:ecpo="http://purl.org/ontology/ecpo#" xmlns:mwo="http://example.org/#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:vann="http://purl.org/vocab/vann/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<rdf:RDF xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:daia="http://purl.org/ontology/daia/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dso="http://purl.org/ontology/dso#" xmlns:ecpo="http://purl.org/ontology/ecpo#" xmlns:mwo="http://example.org/#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ssso="http://purl.org/ontology/ssso#" xmlns:vann="http://purl.org/vocab/vann/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
   <rdf:Description rdf:about="http://example.org/">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
   </rdf:Description>
@@ -18,6 +18,24 @@
   <rdf:Description rdf:about="http://purl.org/ontology/dso#DocumentService">
     <rdfs:isDefinedBy rdf:resource="http://purl.org/ontology/dso"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/ssso#ServiceLimitation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/ssso#ServiceLimitation">
+    <rdfs:label>ServiceLimitation</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/ssso#ServiceLimitation">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/ontology/ssso"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/ssso#limitedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/ssso#limitedBy">
+    <rdfs:label>limitedBy</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/ssso#limitedBy">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/ontology/ssso"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://example.org/#numVolumes">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
@@ -25,7 +43,7 @@
     <rdfs:label>number of volumes</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/#numVolumes">
-    <rdfs:comment>The number of volumes that are included in or excluded from the DocumentService.</rdfs:comment>
+    <rdfs:comment>A limitation to the DocumentService in the form of number of volumes.</rdfs:comment>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/#numVolumes">
     <rdfs:domain rdf:resource="http://purl.org/ontology/dso#DocumentService"/>
@@ -40,7 +58,7 @@
     <rdfs:label>number of issues</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/#numIssues">
-    <rdfs:comment>The number of issues that are included in or excluded from the DocumentService.</rdfs:comment>
+    <rdfs:comment>A limitation to the DocumentService in the form of number of volumes.</rdfs:comment>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/#numIssues">
     <rdfs:domain rdf:resource="http://purl.org/ontology/dso#DocumentService"/>
@@ -48,19 +66,19 @@
   <rdf:Description rdf:about="http://example.org/#numIssues">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/#time">
+  <rdf:Description rdf:about="http://example.org/#timePeriod">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/#time">
+  <rdf:Description rdf:about="http://example.org/#timePeriod">
     <rdfs:label>period of time</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/#time">
-    <rdfs:comment>A part of the item expressed through a period of time which is included in or excluded from the DocumentService.</rdfs:comment>
+  <rdf:Description rdf:about="http://example.org/#timePeriod">
+    <rdfs:comment>A limitation to the DocumentService in the form of a period of time.</rdfs:comment>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/#time">
+  <rdf:Description rdf:about="http://example.org/#timePeriod">
     <rdfs:domain rdf:resource="http://purl.org/ontology/dso#DocumentService"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/#time">
+  <rdf:Description rdf:about="http://example.org/#timePeriod">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#duration"/>
   </rdf:Description>
 </rdf:RDF>
