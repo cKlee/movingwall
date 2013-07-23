@@ -20,11 +20,12 @@ The following namspace prefixes are used to refer to related ontologies:
     @prefix daia: <http://purl.org/ontology/daia/> .
     @prefix dct:  <http://purl.org/dc/terms/> .
     @prefix dso:  <http://purl.org/ontology/dso#> .
+    @prefix ssso:  <http://purl.org/ontology/ssso#> .
     @prefix ecpo: <http://purl.org/ontology/ecpo#> .
     @prefix owl:  <http://www.w3.org/2002/07/owl#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix vann: <http://purl.org/vocab/vann/> .
-	@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+	@prefix xs:  <http://www.w3.org/2001/XMLSchema#> .
 
 The Holding Ontology is defined in RDF/Turtle as following:
 
@@ -38,8 +39,7 @@ The Holding Ontology is defined in RDF/Turtle as following:
 
 [DocumentService]: #documentservice
 
-A **DocumentService** is a service event that is related to one or more [documents](#document). The service event involves a service provider 
-(e.g.a library) and an optional service consumer (e.g. a library patron). Both service provider and service consumer SHOULD be instances of [foaf:Agent](#Agent). The DocumentService class is defined by the [Document Service Ontology].
+A **DocumentService** is a service event that is related to one or more documents. The DocumentService class is defined by the [Document Service Ontology] and is a subclass of [ssso:ServiceEvent].
 
     dso:DocumentService a owl:Class ;
         rdfs:label "DocumentService" ;
@@ -56,43 +56,73 @@ To express the availability of items for selected services, one SHOULD use the p
 [dso:Loan]: http://purl.org/ontology/dso#Loan
 [dso:Presentation]: http://purl.org/ontology/dso#Presentation
 
+## ServiceLimitation
+
+[ServiceLimitation]: #servicelimitation
+
+A **service limitation** is some obstacle that may limit the use of a
+[ssso:ServiceEvent]. For instance the purchase of guns and drugs is limited to
+consumers with special permission. Another example is providing a different
+product or activity than originally requested. Services and limitations are
+connected to each other with properties [ssso:limits] and [ssso:limitedBy].
+
+    ssso:ServiceLimitation a owl:Class ;
+        rdfs:label "ServiceLimitation" ;
+        rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
+		
+[ssso:limits]: http://purl.org/ontology/ssso#limits 
+[ssso:limitedBy]: http://purl.org/ontology/ssso#limitedBy
+[ssso:ServiceEvent]: http://purl.org/ontology/ssso#ServiceEvent
+
+
 # Properties
+
+## limitedBy
+
+[limitedBy]: #limitedBy
+
+Relates a [ssso:ServiceEvent] instance that is **limited by** a [ssso:ServiceLimitation]
+instance to this service limitation. The property [limitedBy] is defined by the [Simple Service Status Ontology (SSSO)].
+
+    ssso:limitedBy a owl:ObjectProperty ;
+        rdfs:label "limitedBy" ;
+        rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
 
 ## numVolumes
 
 [numVolumes]: #numvolumes
 
-The number of volumes that are included in or excluded from the **DocumentService**. The number MUST be of the datatype xsd:integer and thus can be positive or negative.
+A limitation to the [DocumentService] in the form of number of volumes. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
 
 	mwo:numVolumes a owl:DatatypeProperty ;
 		rdfs:label "number of volumes" ;
-		rdfs:comment "The number of volumes that are included in or excluded from the DocumentService." ;
+		rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
 		rdfs:domain dso:DocumentService ;
-		rdfs:range xsd:integer .
+		rdfs:range xs:integer .
 
 ## numIssues
 
 [numIssues]: #issues
 
-The number of issues that are included in or excluded from the **DocumentService**. The number MUST be of the datatype xsd:integer and thus can be positive or negative.
+A limitation to the [DocumentService] in the form of number of issues. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
 
 	mwo:numIssues a owl:DatatypeProperty ;
 		rdfs:label "number of issues" ;
-		rdfs:comment "The number of issues that are included in or excluded from the DocumentService." ;
+		rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
 		rdfs:domain dso:DocumentService ;
-		rdfs:range xsd:integer .
+		rdfs:range xs:integer .
 
-## time
+## timePeriod
 
-[time]: #time
+[timePeriod]: #timePeriod
 
-A part of the item expressed through a period of time which is included in or excluded from the **DocumentService**. The period MUST be of the datatype xsd:duration and thus can be positive or negative.
+A limitation to the [DocumentService] in the form of a period of time. The period MUST be of the datatype **xs:duration** and thus can be positive or negative.
 
-	mwo:time a owl:DatatypeProperty ;
+	mwo:timePeriod a owl:DatatypeProperty ;
 		rdfs:label "period of time" ;
-		rdfs:comment "A part of the item expressed through a period of time which is included in or excluded from the DocumentService." ;
+		rdfs:comment "A limitation to the DocumentService in the form of a period of time." ;
 		rdfs:domain dso:DocumentService ;
-		rdfs:range xsd:duration .
+		rdfs:range xs:duration .
 
 
 # Examples
@@ -126,37 +156,49 @@ $librarycopies
 # The latest volume is available for presentation 
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	mwo:numVolumes "1"^^xsd:integer
+	ssso:limitedBy [
+		mwo:numVolumes "1"^^xs:integer
+	]
 ] .
 
 # All volumes but the last is available for loan 
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	mwo:numVolumes "-1"^^xsd:integer
+	ssso:limitedBy [
+		mwo:numVolumes "-1"^^xs:integer
+	]
 ] .
 
 # The latest 10 issues are available for presentation
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	mwo:numIssues "10"^^xsd:integer
+	ssso:limitedBy [
+		mwo:numIssues "10"^^xs:integer
+	]
 ] .
 
 # All issues but the latest 10 are available for loan. In this example no issues are currently available for loan because there are only 9 issues in the chronology.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	mwo:numIssues "-10"^^xsd:integer
+	ssso:limitedBy [
+		mwo:numIssues "-10"^^xs:integer
+	]
 ] .
 
 # The latest two years are available for presentation. Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	mwo:time "P2Y"^^^xsd:duration
+	ssso:limitedBy [
+		mwo:timePeriod "P2Y"^^^xs:duration
+	]
 ] .
 
 # All issues but within the last two years are available for loan. Given the current year 2001, all issues before 2000 are available for loan.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	mwo:time "-P2Y"^^^xsd:duration
+	ssso:limitedBy [
+		mwo:timePeriod "-P2Y"^^^xs:duration
+	]
 ] .
 
 ```
@@ -169,12 +211,14 @@ $librarycopies daia:availableFor [
 
 ## Informative References
 
-* ISO 20775
-* [Enumeration and Chronology of Periodicals Ontology] (ECPO).
+* [Enumeration and Chronology of Periodicals Ontology] (ECPO)
+* [Document Service Ontology]
+* [Simple Service Status Ontology (SSSO)]
 
 [Document Service Ontology]: http://purl.org/ontology/dso
 [DAIA Ontology]: http://purl.org/ontology/daia
 [Enumeration and Chronology of Periodicals Ontology]: http://purl.org/ontology/ecpo
+[Simple Service Status Ontology (SSSO)]: http://purl.org/ontology/ssso
 
 
 
