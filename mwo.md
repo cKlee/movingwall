@@ -80,8 +80,6 @@ Instances of [MovingWall] must at least participate in a relation with only one 
 			)
 		] .
 
-
-
 # Properties
 
 ## limitedBy
