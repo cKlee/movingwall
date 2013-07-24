@@ -18,22 +18,21 @@ The URI of this ontology as a whole is ...
 
 The following namspace prefixes are used to refer to related ontologies:
 
-    @prefix bibo: <http://purl.org/ontology/bibo/> .
-    @prefix daia: <http://purl.org/ontology/daia/> .
-    @prefix dct:  <http://purl.org/dc/terms/> .
     @prefix dso:  <http://purl.org/ontology/dso#> .
     @prefix ssso:  <http://purl.org/ontology/ssso#> .
-    @prefix ecpo: <http://purl.org/ontology/ecpo#> .
     @prefix owl:  <http://www.w3.org/2002/07/owl#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix vann: <http://purl.org/vocab/vann/> .
     @prefix xs:  <http://www.w3.org/2001/XMLSchema#> .
+    @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-The Holding Ontology is defined in RDF/Turtle as following:
+The Moving Wall Ontology is defined in RDF/Turtle as following:
 
     <> a owl:Ontology ;
         rdfs:label "Moving Wall Ontology (MWO)" ;
-        vann:preferredNamespacePrefix "mwo" .
+        vann:preferredNamespacePrefix "mwo" ;
+        dc:title "Moving Wall Ontology (MWO)" ;
+        dc:description "A vocabulary to express a limitation to a document service"@en .
 
 # Overview
 ``` {.ditaa}
@@ -138,9 +137,14 @@ A limitation to the [dso:DocumentService] in the form of a period of time. The p
 # Examples
 
 ``` {.example}
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix daia: <http://purl.org/ontology/daia/> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix ecpo: <http://purl.org/ontology/ecpo#> .
+
 # The series is a document, consisting of multliple volumes
 $series a bibo:Periodical 
-	dcterms:hasPart $volume1, $volume2, $volume3 .
+	dct:hasPart $volume1, $volume2, $volume3 .
 
 $volume1 a bibo:CollectedDocument ; bibo:volume "1" .
 $volume2 a bibo:CollectedDocument ; bibo:volume "2" .
@@ -148,8 +152,8 @@ $volume3 a bibo:CollectedDocument ; bibo:volume "3" .
 
 # One chapter in Volume 1
 $issue3 a bibo:Document ;
-	dcterms:date "2000"^^dcterms:W3CDTF ;
-	dcterms:isPartOf $volume1 .
+	dct:date "2000"^^dct:W3CDTF ;
+	dct:isPartOf $volume1 .
 
 # A copy of the full series
 $librarycopies 
@@ -160,7 +164,7 @@ $librarycopies
 		ecpo:hasBeginVolumeNumbering "1"  ;
 		ecpo:hasBeginIssueNumbering "1"  ;
 		ecpo:hasBeginTemporal "1999" ;
-		dcterms:extent [ rdf:value "9" ]
+		dct:extent [ rdf:value "9" ]
 	] .
 	
 # The latest volume is available for presentation 
@@ -187,7 +191,8 @@ $librarycopies daia:availableFor [
 	]
 ] .
 
-# All issues but the latest 10 are available for loan. In this example no issues are currently available for loan because there are only 9 issues in the chronology.
+# All issues but the latest 10 are available for loan. 
+# In this example no issues are currently available for loan because there are only 9 issues in the chronology.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
 	mwo:limitedBy [
@@ -195,7 +200,8 @@ $librarycopies daia:availableFor [
 	]
 ] .
 
-# The latest two years are available for presentation. Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
+# The latest two years are available for presentation. 
+# Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
 	mwo:limitedBy [
@@ -203,7 +209,8 @@ $librarycopies daia:availableFor [
 	]
 ] .
 
-# All issues but within the last two years are available for loan. Given the current year 2001, all issues before 2000 are available for loan.
+# All issues but within the last two years are available for loan. 
+# Given the current year 2001, all issues before 2000 are available for loan.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
 	mwo:limitedBy [
