@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Carsten Klee (ZDB)" />
-  <meta name="date" content="2013-07-24 09:08:08 +0200" />
+  <meta name="date" content="2013-07-24 09:13:27 +0200" />
   <title>Moving Wall Ontology (MWO)</title>
    <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -53,7 +53,7 @@
 <header>
 <h1 class="title">Moving Wall Ontology (MWO)</h1>
 <h3 class="author">Carsten Klee (ZDB)</h3>
-<h4 class="date">2013-07-24 09:08:08 +0200</h4>
+<h4 class="date">2013-07-24 09:13:27 +0200</h4>
 </header>
 
 <h1>Table of Contents</h1>
@@ -113,7 +113,7 @@
 | +---------------------+ |   ssso:limits   |   +----------------+   |
 |                         |                 |                        |
 +-------------------------+                 +------------------------+</code></pre>
-<p>A <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> is a subclass of <a href="http://purl.org/ontology/ssso#ServiceEvent">ssso:ServiceEvent</a> and might be limited through a <a href="#movingwall">MovingWall</a>, which is a subclass of [ssso:ServiceLimitation].</p>
+<p>A <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> is a subclass of <a href="http://purl.org/ontology/ssso#ServiceEvent">ssso:ServiceEvent</a> and might be limited through a <a href="#movingwall">MovingWall</a>, which is a subclass of <a href=":%20http://purl.org/ontology/ssso#ServiceLimitation">ssso:ServiceLimitation</a>.</p>
 <p>To state that a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> is limited by a <a href="#movingwall">MovingWall</a> use <a href="http://purl.org/ontology/ssso#limits">ssso:limits</a>.</p>
 <h1 id="classes"><a href="#classes"><span class="header-section-number">3</span> Classes</a></h1>
 <a id="MovingWall"></a><h2 id="movingwall"><a href="#movingwall"><span class="header-section-number">3.1</span> MovingWall</a></h2>
@@ -140,8 +140,8 @@
     ] .</code></pre>
 <h1 id="properties"><a href="#properties"><span class="header-section-number">4</span> Properties</a></h1>
 <a id="limitedBy"></a><h2 id="limitedby"><a href="#limitedby"><span class="header-section-number">4.1</span> limitedBy</a></h2>
-<p>Relates a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> instance that is <strong>limited by</strong> a [mwo:MovingWall] instance to this service limitation.</p>
-<p>To relate a [mwo:MovingWall] to a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> use <a href="http://purl.org/ontology/ssso#limits">ssso:limits</a>.</p>
+<p>Relates a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> instance that is <strong>limited by</strong> a <a href="#movingwall">MovingWall</a> instance to this service limitation.</p>
+<p>To relate a <a href="#movingwall">MovingWall</a> to a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> use <a href="http://purl.org/ontology/ssso#limits">ssso:limits</a>.</p>
 <pre><code>mwo:limitedBy a owl:ObjectProperty ;
     rdfs:label &quot;limited by&quot; ;
     rdfs:comment &quot;Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation.&quot; ;
