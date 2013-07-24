@@ -13,16 +13,31 @@
 <> a owl:Ontology ;
     rdfs:label "Moving Wall Ontology (MWO)" ;
     vann:preferredNamespacePrefix "mwo" .
-dso:DocumentService a owl:Class ;
-    rdfs:label "DocumentService" ;
-    rdfs:isDefinedBy <http://purl.org/ontology/dso> .
-ssso:ServiceLimitation a owl:Class ;
-    rdfs:label "ServiceLimitation" ;
-    rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
-    
-ssso:limitedBy a owl:ObjectProperty ;
-    rdfs:label "limitedBy" ;
-    rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
+mwo:MovingWall a owl:Class ;
+    rdfs:label "moving wall" ;
+    rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"
+    rdfs:subClassOf ssso:ServiceLimitation ;
+    rdfs:subClassOf [
+        a owl:Class ;
+        owl:unionOf (
+            [ a owl:Restriction ;
+                owl:onProperty mwo:numVolumes ;
+                owl:someValuesFrom owl:Thing
+            ] [ a owl:Restriction ;
+                owl:onProperty mwo:numIssues ;
+                owl:someValuesFrom owl:Thing
+            ] [ a owl:Restriction ;
+                owl:onProperty mwo:timePeriod ;
+                owl:someValuesFrom owl:Thing
+            ]
+        )
+    ] .
+mwo:limitedBy a owl:ObjectProperty ;
+    rdfs:label "limited by" ;
+    rdfs:comment "Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range mwo:MovingWall ;
+    rdfs:subPropertyOf ssso:limitedBy .
 mwo:numVolumes a owl:DatatypeProperty ;
     rdfs:label "number of volumes" ;
     rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;

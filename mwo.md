@@ -62,7 +62,7 @@ Instances of [MovingWall] must at least participate in a relation with only one 
 
 	mwo:MovingWall a owl:Class ;
 		rdfs:label "moving wall" ;
-		rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"
+		rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent" ;
 		rdfs:subClassOf ssso:ServiceLimitation ;
 		rdfs:subClassOf [
 			a owl:Class ;
