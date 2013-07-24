@@ -86,9 +86,9 @@ Instances of [MovingWall] must at least participate in a relation with only one 
 
 [limitedBy]: #limitedBy
 
-Relates a [dso:DocumentService] instance that is **limited by** a [mwo:MovingWall] instance to this service limitation.
+Relates a [dso:DocumentService] instance that is **limited by** a [MovingWall] instance to this service limitation.
 
-To relate a [mwo:MovingWall] to a [dso:DocumentService] use [ssso:limits].
+To relate a [MovingWall] to a [dso:DocumentService] use [ssso:limits].
 
 	mwo:limitedBy a owl:ObjectProperty ;
 		rdfs:label "limited by" ;
@@ -232,6 +232,7 @@ $librarycopies daia:availableFor [
 [ssso:limits]: http://purl.org/ontology/ssso#limits 
 [ssso:limitedBy]: http://purl.org/ontology/ssso#limitedBy
 [ssso:ServiceEvent]: http://purl.org/ontology/ssso#ServiceEvent
+[ssso:ServiceLimitation]: : http://purl.org/ontology/ssso#ServiceLimitation
 
 [DAIA Ontology]: http://purl.org/ontology/daia
 [daia:availableFor]: http://purl.org/ontology/daia/availableFor 
