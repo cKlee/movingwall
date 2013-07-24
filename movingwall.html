@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Carsten Klee (ZDB)" />
-  <meta name="date" content="2013-07-24 09:13:27 +0200" />
+  <meta name="date" content="2013-07-24 09:15:45 +0200" />
   <title>Moving Wall Ontology (MWO)</title>
    <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -53,7 +53,7 @@
 <header>
 <h1 class="title">Moving Wall Ontology (MWO)</h1>
 <h3 class="author">Carsten Klee (ZDB)</h3>
-<h4 class="date">2013-07-24 09:13:27 +0200</h4>
+<h4 class="date">2013-07-24 09:15:45 +0200</h4>
 </header>
 
 <h1>Table of Contents</h1>
@@ -149,21 +149,21 @@
     rdfs:range mwo:MovingWall ;
     rdfs:subPropertyOf ssso:limitedBy .</code></pre>
 <a id="numVolumes"></a><h2 id="numvolumes"><a href="#numvolumes"><span class="header-section-number">4.2</span> numVolumes</a></h2>
-<p>A limitation to the [DocumentService] in the form of number of volumes. The number MUST be of the datatype <strong>xs:integer</strong> and thus can be positive or negative.</p>
+<p>A limitation to the <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> in the form of number of volumes. The number MUST be of the datatype <strong>xs:integer</strong> and thus can be positive or negative.</p>
 <pre><code>mwo:numVolumes a owl:DatatypeProperty ;
     rdfs:label &quot;number of volumes&quot; ;
     rdfs:comment &quot;A limitation to the DocumentService in the form of number of volumes.&quot; ;
     rdfs:domain dso:DocumentService ;
     rdfs:range xs:integer .</code></pre>
 <a id="numIssues"></a><h2 id="numissues"><a href="#numissues"><span class="header-section-number">4.3</span> numIssues</a></h2>
-<p>A limitation to the [DocumentService] in the form of number of issues. The number MUST be of the datatype <strong>xs:integer</strong> and thus can be positive or negative.</p>
+<p>A limitation to the <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> in the form of number of issues. The number MUST be of the datatype <strong>xs:integer</strong> and thus can be positive or negative.</p>
 <pre><code>mwo:numIssues a owl:DatatypeProperty ;
     rdfs:label &quot;number of issues&quot; ;
     rdfs:comment &quot;A limitation to the DocumentService in the form of number of volumes.&quot; ;
     rdfs:domain dso:DocumentService ;
     rdfs:range xs:integer .</code></pre>
 <a id="timePeriod"></a><h2 id="timeperiod"><a href="#timeperiod"><span class="header-section-number">4.4</span> timePeriod</a></h2>
-<p>A limitation to the [DocumentService] in the form of a period of time. The period MUST be of the datatype <strong>xs:duration</strong> and thus can be positive or negative.</p>
+<p>A limitation to the <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> in the form of a period of time. The period MUST be of the datatype <strong>xs:duration</strong> and thus can be positive or negative.</p>
 <pre><code>mwo:timePeriod a owl:DatatypeProperty ;
     rdfs:label &quot;period of time&quot; ;
     rdfs:comment &quot;A limitation to the DocumentService in the form of a period of time.&quot; ;
