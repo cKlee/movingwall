@@ -19,12 +19,13 @@ The URI of this ontology as a whole is ...
 The following namspace prefixes are used to refer to related ontologies:
 
     @prefix dso:  <http://purl.org/ontology/dso#> .
-    @prefix ssso:  <http://purl.org/ontology/ssso#> .
+    @prefix ssso: <http://purl.org/ontology/ssso#> .
+    @prefix gr:   <http://purl.org/goodrelations/v1#> .
     @prefix owl:  <http://www.w3.org/2002/07/owl#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix vann: <http://purl.org/vocab/vann/> .
-    @prefix xs:  <http://www.w3.org/2001/XMLSchema#> .
-    @prefix dc: <http://purl.org/dc/elements/1.1/> .
+    @prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix dc:   <http://purl.org/dc/elements/1.1/> .
 
 The Moving Wall Ontology is defined in RDF/Turtle as following:
 
@@ -43,7 +44,7 @@ The Moving Wall Ontology is defined in RDF/Turtle as following:
 | | dso:DocumentService | |                 |   |   MovingWall   |   |
 | |                     | |<----------------|   |                |   |
 | +---------------------+ |   ssso:limits   |   +----------------+   |
-|                         |                 |                        |
+|                         |                 |  gr:QuantitativeValue  |
 +-------------------------+                 +------------------------+
 ```
 
@@ -67,18 +68,7 @@ Instances of [MovingWall] must at least participate in a relation with only one 
 		rdfs:subClassOf ssso:ServiceLimitation ;
 		rdfs:subClassOf [
 			a owl:Class ;
-			owl:unionOf (
-				[ a owl:Restriction ;
-					owl:onProperty mwo:numVolumes ;
-					owl:someValuesFrom owl:Thing
-				] [ a owl:Restriction ;
-					owl:onProperty mwo:numIssues ;
-					owl:someValuesFrom owl:Thing
-				] [ a owl:Restriction ;
-					owl:onProperty mwo:timePeriod ;
-					owl:someValuesFrom owl:Thing
-				]
-			)
+			owl:intersectionOf (ssso:ServiceLimitation gr:QuantitativeValue)
 		] .
 
 # Properties
@@ -98,41 +88,27 @@ To relate a [MovingWall] to a [dso:DocumentService] use [ssso:limits].
 		rdfs:range mwo:MovingWall ;
 		rdfs:subPropertyOf ssso:limitedBy .
 
-## numVolumes
+## hasValue
 
-[numVolumes]: #numvolumes
+[hasValue]: #hasvalue
 
-A limitation to the [dso:DocumentService] in the form of number of volumes. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
+Relates a [MovingWall] to its quantitative value. [gr:hasValue] is defined by [GoodRelations].
 
-	mwo:numVolumes a owl:DatatypeProperty ;
-		rdfs:label "number of volumes" ;
-		rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
-		rdfs:domain dso:DocumentService ;
-		rdfs:range xs:integer .
+	gr:hasValue a owl:AnnotationProperty ;
+		rdfs:label "has value" ;
+		rdfs:comment "Relates a moving wall to its quantitative value" ;
+		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
-## numIssues
+## hasUnitOfMeasurement
 
-[numIssues]: #issues
+[hasUnitOfMeasurement]: #hasunitofmeasurement
 
-A limitation to the [dso:DocumentService] in the form of number of issues. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
+Relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurement] is defined by [GoodRelations].
 
-	mwo:numIssues a owl:DatatypeProperty ;
-		rdfs:label "number of issues" ;
-		rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
-		rdfs:domain dso:DocumentService ;
-		rdfs:range xs:integer .
-
-## timePeriod
-
-[timePeriod]: #timePeriod
-
-A limitation to the [dso:DocumentService] in the form of a period of time. The period MUST be of the datatype **xs:duration** and thus can be positive or negative.
-
-	mwo:timePeriod a owl:DatatypeProperty ;
-		rdfs:label "period of time" ;
-		rdfs:comment "A limitation to the DocumentService in the form of a period of time." ;
-		rdfs:domain dso:DocumentService ;
-		rdfs:range xs:duration .
+	gr:hasUnitOfMeasurement a owl:AnnotationProperty ;
+		rdfs:label "has unit of measurement" ;
+		rdfs:comment "Relates a moving wall to its unit of measurement." ;
+		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 # Examples
 
@@ -171,7 +147,8 @@ $librarycopies
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
 	mwo:limitedBy [
-		mwo:numVolumes "1"^^xs:integer
+		gr:hasValue "1"^^xs:integer
+		gr:hasUnitOfMeasurement "volume"^^xs:string
 	]
 ] .
 
@@ -179,7 +156,8 @@ $librarycopies daia:availableFor [
 $librarycopies daia:availableFor [
 	a dso:Loan ;
 	mwo:limitedBy [
-		mwo:numVolumes "-1"^^xs:integer
+		gr:hasValue "-1"^^xs:integer ;
+		gr:hasUnitOfMeasurement "volume"^^xs:string
 	]
 ] .
 
@@ -187,7 +165,8 @@ $librarycopies daia:availableFor [
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
 	mwo:limitedBy [
-		mwo:numIssues "10"^^xs:integer
+		gr:hasValue "10"^^xs:integer ;
+		gr:hasUnitOfMeasurement "issue"^^xs:string
 	]
 ] .
 
@@ -196,7 +175,8 @@ $librarycopies daia:availableFor [
 $librarycopies daia:availableFor [
 	a dso:Loan ;
 	mwo:limitedBy [
-		mwo:numIssues "-10"^^xs:integer
+		gr:hasValue "-10"^^xs:integer ;
+		gr:hasUnitOfMeasurement "issue"^^xs:string
 	]
 ] .
 
@@ -205,7 +185,7 @@ $librarycopies daia:availableFor [
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
 	mwo:limitedBy [
-		mwo:timePeriod "P2Y"^^^xs:duration
+		gr:hasValue "P2Y"^^xs:yearMonthDuration
 	]
 ] .
 
@@ -214,7 +194,7 @@ $librarycopies daia:availableFor [
 $librarycopies daia:availableFor [
 	a dso:Loan ;
 	mwo:limitedBy [
-		mwo:timePeriod "-P2Y"^^^xs:duration
+		gr:hasValue "-P2Y"^^xs:yearMonthDuration
 	]
 ] .
 
@@ -224,9 +204,14 @@ $librarycopies daia:availableFor [
 
 ## Informative References
 
-* [Enumeration and Chronology of Periodicals Ontology (ECPO)]
 * [Document Service Ontology]
 * [Simple Service Status Ontology (SSSO)]
+* [GoodRelations]
+* [DAIA Ontology]
+* [Bibliographic Ontology]
+* [Enumeration and Chronology of Periodicals Ontology (ECPO)]
+* [Dublin Core Metadata Terms]
+* [XML Schema]
 
 [Document Service Ontology]: http://purl.org/ontology/dso
 [dso:DocumentService]: http://purl.org/ontology/dso#DocumentService
@@ -237,12 +222,19 @@ $librarycopies daia:availableFor [
 [ssso:limits]: http://purl.org/ontology/ssso#limits 
 [ssso:limitedBy]: http://purl.org/ontology/ssso#limitedBy
 [ssso:ServiceEvent]: http://purl.org/ontology/ssso#ServiceEvent
-[ssso:ServiceLimitation]: : http://purl.org/ontology/ssso#ServiceLimitation
+[ssso:ServiceLimitation]: http://purl.org/ontology/ssso#ServiceLimitation
+
+[GoodRelations]: http://purl.org/goodrelations/v1
+[gr:hasValue]: http://purl.org/goodrelations/v1#hasValue
+[gr:hasUnitOfMeasurement] http://purl.org/goodrelations/v1#hasUnitOfMeasurement
 
 [DAIA Ontology]: http://purl.org/ontology/daia
 [daia:availableFor]: http://purl.org/ontology/daia/availableFor 
 [daia:availableOf]: http://purl.org/ontology/daia/availableOf 
 [daia:unavailableFor]: http://purl.org/ontology/daia/unavailableFor 
-[daia:unavailableOf]: http://purl.org/ontology/daia/unavailableOf 
+[daia:unavailableOf]: http://purl.org/ontology/daia/unavailableOf
 
 [Enumeration and Chronology of Periodicals Ontology (ECPO)]: http://purl.org/ontology/ecpo
+[Bibliographic Ontology]: http://purl.org/ontology/bibo
+[Dublin Core Metadata Terms] http://dublincore.org/documents/dcmi-terms/
+[XML Schema]: http://www.w3.org/TR/xmlschema-0/
