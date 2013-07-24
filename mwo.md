@@ -222,10 +222,6 @@ $librarycopies daia:availableFor [
 
 # References
 
-## Normative References
-
-....
-
 ## Informative References
 
 * [Enumeration and Chronology of Periodicals Ontology (ECPO)]
