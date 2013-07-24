@@ -2,6 +2,7 @@
 @prefix mwo: <http://example.org/#> .
 @prefix dso: <http://purl.org/ontology/dso#> .
 @prefix ssso: <http://purl.org/ontology/ssso#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
@@ -21,21 +22,8 @@ mwo:MovingWall
     rdfs:label "moving wall" ;
     rdfs:subClassOf ssso:ServiceLimitation, [
         a owl:Class ;
-        owl:unionOf ([
-                a owl:Restriction ;
-                owl:onProperty mwo:numVolumes ;
-                owl:someValuesFrom owl:Thing
-            ]
-            [
-                a owl:Restriction ;
-                owl:onProperty mwo:numIssues ;
-                owl:someValuesFrom owl:Thing
-            ]
-            [
-                a owl:Restriction ;
-                owl:onProperty mwo:timePeriod ;
-                owl:someValuesFrom owl:Thing
-            ]
+        owl:intersectionOf (ssso:ServiceLimitation
+            gr:QuantitativeValue
         )
     ] .
 
@@ -47,24 +35,15 @@ mwo:limitedBy
     rdfs:range mwo:MovingWall ;
     rdfs:subPropertyOf ssso:limitedBy .
 
-mwo:numIssues
-    a owl:DatatypeProperty ;
-    rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
-    rdfs:domain dso:DocumentService ;
-    rdfs:label "number of issues" ;
-    rdfs:range xs:integer .
+gr:hasUnitOfMeasurement
+    a owl:AnnotationProperty ;
+    rdfs:comment "Relates a moving wall to its unit of measurement." ;
+    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
+    rdfs:label "has unit of measurement" .
 
-mwo:numVolumes
-    a owl:DatatypeProperty ;
-    rdfs:comment "A limitation to the DocumentService in the form of number of volumes." ;
-    rdfs:domain dso:DocumentService ;
-    rdfs:label "number of volumes" ;
-    rdfs:range xs:integer .
-
-mwo:timePeriod
-    a owl:DatatypeProperty ;
-    rdfs:comment "A limitation to the DocumentService in the form of a period of time." ;
-    rdfs:domain dso:DocumentService ;
-    rdfs:label "period of time" ;
-    rdfs:range xs:duration .
+gr:hasValue
+    a owl:AnnotationProperty ;
+    rdfs:comment "Relates a moving wall to its quantitative value" ;
+    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
+    rdfs:label "has value" .
 
