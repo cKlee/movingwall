@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-23 15:08:08 +0200
+% 2013-07-24 08:58:57 +0200
 
 # Introduction
 
@@ -29,7 +29,7 @@ The following namspace prefixes are used to refer to related ontologies:
     @prefix owl:  <http://www.w3.org/2002/07/owl#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix vann: <http://purl.org/vocab/vann/> .
-	@prefix xs:  <http://www.w3.org/2001/XMLSchema#> .
+    @prefix xs:  <http://www.w3.org/2001/XMLSchema#> .
 
 The Holding Ontology is defined in RDF/Turtle as following:
 
@@ -37,46 +37,53 @@ The Holding Ontology is defined in RDF/Turtle as following:
         rdfs:label "Moving Wall Ontology (MWO)" ;
         vann:preferredNamespacePrefix "mwo" .
 
+# Overview
+``` {.ditaa}
++-------------------------+                 +------------------------+
+|    ssso:ServiceEvent    |                 | ssso:ServiceLimitation |
+| +---------------------+ |    limitedBy    |   +----------------+   |
+| |                     +---------------------->|                |   |
+| | dso:DocumentService | |                 |   |   MovingWall   |   |
+| |                     | |<----------------|   |                |   |
+| +---------------------+ |   ssso:limits   |   +----------------+   |
+|                         |                 |                        |
++-------------------------+                 +------------------------+
+```
+
+A [dso:DocumentService] is a subclass of [ssso:ServiceEvent] and might be limited through a [MovingWall], which is a subclass of [ssso:ServiceLimitation].
+
+To state that a [dso:DocumentService] is limited by a [MovingWall] use [ssso:limits].
+
 # Classes
 
-## DocumentService
+## MovingWall
 
-[DocumentService]: #documentservice
+[MovingWall]: #movingwall
 
-A **DocumentService** is a service event that is related to one or more documents. The DocumentService class is defined by the [Document Service Ontology] and is a subclass of [ssso:ServiceEvent].
+A **MovingWall** is some obstacle that may limit the use of a [ssso:ServiceEvent]. 
 
-    dso:DocumentService a owl:Class ;
-        rdfs:label "DocumentService" ;
-        rdfs:isDefinedBy <http://purl.org/ontology/dso> .
+Instances of [MovingWall] must at least participate in a relation with only one of the properties [numVolumes], [numIssues] or [timePeriod].
 
-Typical document services within the scope of holdings ontology involve a loan event ([dso:Loan]) and a presentation event ([dso:Presentation]). 
-To express the availability of items for selected services, one SHOULD use the properties [daia:availableFor] and [daia:unavailableFor] from the [DAIA Ontology].
+	mwo:MovingWall a owl:Class ;
+		rdfs:label "moving wall" ;
+		rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"
+		rdfs:subClassOf ssso:ServiceLimitation ;
+		rdfs:subClassOf [
+			a owl:Class ;
+			owl:unionOf (
+				[ a owl:Restriction ;
+					owl:onProperty mwo:numVolumes ;
+					owl:someValuesFrom owl:Thing
+				] [ a owl:Restriction ;
+					owl:onProperty mwo:numIssues ;
+					owl:someValuesFrom owl:Thing
+				] [ a owl:Restriction ;
+					owl:onProperty mwo:timePeriod ;
+					owl:someValuesFrom owl:Thing
+				]
+			)
+		] .
 
-[daia:availableFor]: http://purl.org/ontology/daia/availableFor 
-[daia:availableOf]: http://purl.org/ontology/daia/availableOf 
-[daia:unavailableFor]: http://purl.org/ontology/daia/unavailableFor 
-[daia:unavailableOf]: http://purl.org/ontology/daia/unavailableOf 
-
-[dso:Loan]: http://purl.org/ontology/dso#Loan
-[dso:Presentation]: http://purl.org/ontology/dso#Presentation
-
-## ServiceLimitation
-
-[ServiceLimitation]: #servicelimitation
-
-A **service limitation** is some obstacle that may limit the use of a
-[ssso:ServiceEvent]. For instance the purchase of guns and drugs is limited to
-consumers with special permission. Another example is providing a different
-product or activity than originally requested. Services and limitations are
-connected to each other with properties [ssso:limits] and [ssso:limitedBy].
-
-    ssso:ServiceLimitation a owl:Class ;
-        rdfs:label "ServiceLimitation" ;
-        rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
-		
-[ssso:limits]: http://purl.org/ontology/ssso#limits 
-[ssso:limitedBy]: http://purl.org/ontology/ssso#limitedBy
-[ssso:ServiceEvent]: http://purl.org/ontology/ssso#ServiceEvent
 
 
 # Properties
@@ -85,12 +92,16 @@ connected to each other with properties [ssso:limits] and [ssso:limitedBy].
 
 [limitedBy]: #limitedBy
 
-Relates a [ssso:ServiceEvent] instance that is **limited by** a [ssso:ServiceLimitation]
-instance to this service limitation. The property [limitedBy] is defined by the [Simple Service Status Ontology (SSSO)].
+Relates a [dso:DocumentService] instance that is **limited by** a [mwo:MovingWall] instance to this service limitation.
 
-    ssso:limitedBy a owl:ObjectProperty ;
-        rdfs:label "limitedBy" ;
-        rdfs:isDefinedBy <http://purl.org/ontology/ssso> .
+To relate a [mwo:MovingWall] to a [dso:DocumentService] use [ssso:limits].
+
+	mwo:limitedBy a owl:ObjectProperty ;
+		rdfs:label "limited by" ;
+		rdfs:comment "Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation." ;
+		rdfs:domain dso:DocumentService ;
+		rdfs:range mwo:MovingWall ;
+		rdfs:subPropertyOf ssso:limitedBy .
 
 ## numVolumes
 
@@ -128,13 +139,12 @@ A limitation to the [DocumentService] in the form of a period of time. The perio
 		rdfs:domain dso:DocumentService ;
 		rdfs:range xs:duration .
 
-
 # Examples
 
 ``` {.example}
 # The series is a document, consisting of multliple volumes
 $series a bibo:Periodical 
-    dcterms:hasPart $volume1, $volume2, $volume3 .
+	dcterms:hasPart $volume1, $volume2, $volume3 .
 
 $volume1 a bibo:CollectedDocument ; bibo:volume "1" .
 $volume2 a bibo:CollectedDocument ; bibo:volume "2" .
@@ -143,24 +153,24 @@ $volume3 a bibo:CollectedDocument ; bibo:volume "3" .
 # One chapter in Volume 1
 $issue3 a bibo:Document ;
 	dcterms:date "2000"^^dcterms:W3CDTF ;
-    dcterms:isPartOf $volume1 .
+	dcterms:isPartOf $volume1 .
 
 # A copy of the full series
 $librarycopies 
-    holding:exemplarOf $series ;
-    holding:heldBy $libray ;
-    ecpo:hasChronology [
-        a ecpo:CurrentChronology ;
-        ecpo:hasBeginVolumeNumbering "1"  ;
-        ecpo:hasBeginIssueNumbering "1"  ;
+	holding:exemplarOf $series ;
+	holding:heldBy $libray ;
+	ecpo:hasChronology [
+		a ecpo:CurrentChronology ;
+		ecpo:hasBeginVolumeNumbering "1"  ;
+		ecpo:hasBeginIssueNumbering "1"  ;
 		ecpo:hasBeginTemporal "1999" ;
-		dcterms:extent [ rdf:value "9" ]	
-    ] .
+		dcterms:extent [ rdf:value "9" ]
+	] .
 	
 # The latest volume is available for presentation 
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	ssso:limitedBy [
+	mwo:limitedBy [
 		mwo:numVolumes "1"^^xs:integer
 	]
 ] .
@@ -168,7 +178,7 @@ $librarycopies daia:availableFor [
 # All volumes but the last is available for loan 
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	ssso:limitedBy [
+	mwo:limitedBy [
 		mwo:numVolumes "-1"^^xs:integer
 	]
 ] .
@@ -176,7 +186,7 @@ $librarycopies daia:availableFor [
 # The latest 10 issues are available for presentation
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	ssso:limitedBy [
+	mwo:limitedBy [
 		mwo:numIssues "10"^^xs:integer
 	]
 ] .
@@ -184,7 +194,7 @@ $librarycopies daia:availableFor [
 # All issues but the latest 10 are available for loan. In this example no issues are currently available for loan because there are only 9 issues in the chronology.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	ssso:limitedBy [
+	mwo:limitedBy [
 		mwo:numIssues "-10"^^xs:integer
 	]
 ] .
@@ -192,7 +202,7 @@ $librarycopies daia:availableFor [
 # The latest two years are available for presentation. Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	ssso:limitedBy [
+	mwo:limitedBy [
 		mwo:timePeriod "P2Y"^^^xs:duration
 	]
 ] .
@@ -200,7 +210,7 @@ $librarycopies daia:availableFor [
 # All issues but within the last two years are available for loan. Given the current year 2001, all issues before 2000 are available for loan.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	ssso:limitedBy [
+	mwo:limitedBy [
 		mwo:timePeriod "-P2Y"^^^xs:duration
 	]
 ] .
@@ -215,14 +225,24 @@ $librarycopies daia:availableFor [
 
 ## Informative References
 
-* [Enumeration and Chronology of Periodicals Ontology] (ECPO)
+* [Enumeration and Chronology of Periodicals Ontology (ECPO)]
 * [Document Service Ontology]
 * [Simple Service Status Ontology (SSSO)]
 
 [Document Service Ontology]: http://purl.org/ontology/dso
-[DAIA Ontology]: http://purl.org/ontology/daia
-[Enumeration and Chronology of Periodicals Ontology]: http://purl.org/ontology/ecpo
+[dso:DocumentService]: http://purl.org/ontology/dso#DocumentService
+[dso:Loan]: http://purl.org/ontology/dso#Loan
+[dso:Presentation]: http://purl.org/ontology/dso#Presentation
+
 [Simple Service Status Ontology (SSSO)]: http://purl.org/ontology/ssso
+[ssso:limits]: http://purl.org/ontology/ssso#limits 
+[ssso:limitedBy]: http://purl.org/ontology/ssso#limitedBy
+[ssso:ServiceEvent]: http://purl.org/ontology/ssso#ServiceEvent
 
+[DAIA Ontology]: http://purl.org/ontology/daia
+[daia:availableFor]: http://purl.org/ontology/daia/availableFor 
+[daia:availableOf]: http://purl.org/ontology/daia/availableOf 
+[daia:unavailableFor]: http://purl.org/ontology/daia/unavailableFor 
+[daia:unavailableOf]: http://purl.org/ontology/daia/unavailableOf 
 
-
+[Enumeration and Chronology of Periodicals Ontology (ECPO)]: http://purl.org/ontology/ecpo
