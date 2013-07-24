@@ -1,6 +1,8 @@
 # Introduction
 
-The **Moving Wall Ontology (MWO)** is a vocabulary to express the retention period of an item for a specific service.
+The **Moving Wall Ontology (MWO)** is a vocabulary to express a limitation to a document service.
+
+In the real world limitations of document services are often called 'retention period', 'access restriction' or 'moving wall'.
 
 ## Status of this document
 
