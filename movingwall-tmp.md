@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-24 09:01:55 +0200
+% 2013-07-24 09:08:08 +0200
 
 # Introduction
 
@@ -83,8 +83,6 @@ Instances of [MovingWall] must at least participate in a relation with only one 
 				]
 			)
 		] .
-
-
 
 # Properties
 
