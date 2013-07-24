@@ -101,7 +101,7 @@ To relate a [MovingWall] to a [dso:DocumentService] use [ssso:limits].
 
 [numVolumes]: #numvolumes
 
-A limitation to the [DocumentService] in the form of number of volumes. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
+A limitation to the [dso:DocumentService] in the form of number of volumes. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
 
 	mwo:numVolumes a owl:DatatypeProperty ;
 		rdfs:label "number of volumes" ;
@@ -113,7 +113,7 @@ A limitation to the [DocumentService] in the form of number of volumes. The numb
 
 [numIssues]: #issues
 
-A limitation to the [DocumentService] in the form of number of issues. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
+A limitation to the [dso:DocumentService] in the form of number of issues. The number MUST be of the datatype **xs:integer** and thus can be positive or negative.
 
 	mwo:numIssues a owl:DatatypeProperty ;
 		rdfs:label "number of issues" ;
@@ -125,7 +125,7 @@ A limitation to the [DocumentService] in the form of number of issues. The numbe
 
 [timePeriod]: #timePeriod
 
-A limitation to the [DocumentService] in the form of a period of time. The period MUST be of the datatype **xs:duration** and thus can be positive or negative.
+A limitation to the [dso:DocumentService] in the form of a period of time. The period MUST be of the datatype **xs:duration** and thus can be positive or negative.
 
 	mwo:timePeriod a owl:DatatypeProperty ;
 		rdfs:label "period of time" ;
