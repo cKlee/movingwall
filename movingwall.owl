@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:daia="http://purl.org/ontology/daia/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dso="http://purl.org/ontology/dso#" xmlns:ecpo="http://purl.org/ontology/ecpo#" xmlns:mwo="http://example.org/#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ssso="http://purl.org/ontology/ssso#" xmlns:vann="http://purl.org/vocab/vann/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
+<rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dso="http://purl.org/ontology/dso#" xmlns:mwo="http://example.org/#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ssso="http://purl.org/ontology/ssso#" xmlns:vann="http://purl.org/vocab/vann/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
   <rdf:Description rdf:about="http://example.org/">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
   </rdf:Description>
@@ -8,6 +8,12 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/">
     <vann:preferredNamespacePrefix>mwo</vann:preferredNamespacePrefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/">
+    <dc:title>Moving Wall Ontology (MWO)</dc:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/">
+    <dc:description xml:lang="en">A vocabulary to express a limitation to a document service</dc:description>
   </rdf:Description>
   <rdf:Description rdf:nodeID="genid1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
