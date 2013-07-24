@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-24 16:17:30 +0200
+% 2013-07-24 16:20:34 +0200
 
 # Introduction
 
@@ -10,7 +10,7 @@ In the real world limitations of document services are often called 'retention p
 
 ## Status of this document
 
-This document is an early draft. [ Feedback ](https://github.com/cklee/movingwall/issues) is welcome!
+This document is an early draft. [Feedback](https://github.com/cklee/movingwall/issues) is welcome!
 
 ## Namespaces and Ontology
 
