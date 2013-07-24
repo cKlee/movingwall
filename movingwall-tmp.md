@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-24 16:20:34 +0200
+% 2013-07-24 16:24:03 +0200
 
 # Introduction
 
@@ -230,7 +230,7 @@ $librarycopies daia:availableFor [
 
 [GoodRelations]: http://purl.org/goodrelations/v1
 [gr:hasValue]: http://purl.org/goodrelations/v1#hasValue
-[gr:hasUnitOfMeasurement] http://purl.org/goodrelations/v1#hasUnitOfMeasurement
+[gr:hasUnitOfMeasurement]: http://purl.org/goodrelations/v1#hasUnitOfMeasurement
 
 [DAIA Ontology]: http://purl.org/ontology/daia
 [daia:availableFor]: http://purl.org/ontology/daia/availableFor 
@@ -240,5 +240,5 @@ $librarycopies daia:availableFor [
 
 [Enumeration and Chronology of Periodicals Ontology (ECPO)]: http://purl.org/ontology/ecpo
 [Bibliographic Ontology]: http://purl.org/ontology/bibo
-[Dublin Core Metadata Terms] http://dublincore.org/documents/dcmi-terms/
+[Dublin Core Metadata Terms]: http://dublincore.org/documents/dcmi-terms/
 [XML Schema]: http://www.w3.org/TR/xmlschema-0/
