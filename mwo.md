@@ -6,7 +6,7 @@ In the real world limitations of document services are often called 'retention p
 
 ## Status of this document
 
-This document is an early draft. [ Feedback ](https://github.com/cklee/movingwall/issues) is welcome!
+This document is an early draft. [Feedback](https://github.com/cklee/movingwall/issues) is welcome!
 
 ## Namespaces and Ontology
 
