@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-24 10:21:24 +0200
+% 2013-07-24 10:25:26 +0200
 
 # Introduction
 
@@ -225,10 +225,6 @@ $librarycopies daia:availableFor [
 ```
 
 # References
-
-## Normative References
-
-....
 
 ## Informative References
 
