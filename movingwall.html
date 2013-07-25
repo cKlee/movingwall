@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Carsten Klee (ZDB)" />
+  <meta name="date" content="2013-07-25 13:35:55 +0200" />
+  <title>Moving Wall Ontology (MWO)</title>
+   <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+  body { font-family: sans-serif; }
+  a { text-decoration: none }
+  a:hover { text-decoration: underline }
+  h1 { font: 170% sans-serif }
+  h1.title { font-size: 200%; font-weight: bold; }
+  h2 { font: 140% sans-serif }
+  h3 { font: 120% sans-serif }
+  dt { font-weight: bold; }
+  h1, h2, h3, h1 a, h2 a, h3 a { color: #005A9C; }
+  table { border-collapse: collapse; }
+  td { border: 1px solid #999; padding: 3px }
+  dl p { margin-top: 0; }
+  dt { margin-top: 0.8em; }
+  dd { margin-left: 1.5em; }
+  ol { margin-bottom: 1em; }
+  table + p { margin-top: 1em; }
+	  pre
+	  {
+	  margin-top: 15px;
+	  margin-right: 0px;
+	  margin-bottom: 15px;
+	  margin-left: 0px;
+	  background-color: #f8f8f8;
+	  line-height: 19px;
+	  overflow-x: auto;
+	  overflow-y: auto;
+	  padding-top: 6px;
+	  padding-right: 10px;
+	  padding-bottom: 6px;
+	  padding-left: 10px;
+	  border-top-left-radius: 3px;
+	  border-top-right-radius: 3px;
+	  border-bottom-right-radius: 3px;
+	  border-bottom-left-radius: 3px;
+	  border: 1px solid #dddddd;
+	  }
+  </style>
+</head>
+<body>
+<a href="https://github.com/cKlee/movingwall/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+<header>
+<h1 class="title">Moving Wall Ontology (MWO)</h1>
+<h3 class="author">Carsten Klee (ZDB)</h3>
+<h4 class="date">2013-07-25 13:35:55 +0200</h4>
+</header>
+
+<h1>Table of Contents</h1>
+<nav id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a><ul>
+<li><a href="#status-of-this-document"><span class="toc-section-number">1.1</span> Status of this document</a></li>
+<li><a href="#namespaces-and-ontology"><span class="toc-section-number">1.2</span> Namespaces and Ontology</a></li>
+</ul></li>
+<li><a href="#overview"><span class="toc-section-number">2</span> Overview</a></li>
+<li><a href="#classes"><span class="toc-section-number">3</span> Classes</a><ul>
+<li><a href="#movingwall"><span class="toc-section-number">3.1</span> MovingWall</a></li>
+</ul></li>
+<li><a href="#properties"><span class="toc-section-number">4</span> Properties</a><ul>
+<li><a href="#limitedby"><span class="toc-section-number">4.1</span> limitedBy</a></li>
+<li><a href="#hasvalue"><span class="toc-section-number">4.2</span> hasValue</a></li>
+<li><a href="#hasunitofmeasurement"><span class="toc-section-number">4.3</span> hasUnitOfMeasurement</a></li>
+</ul></li>
+<li><a href="#examples"><span class="toc-section-number">5</span> Examples</a></li>
+<li><a href="#references"><span class="toc-section-number">6</span> References</a><ul>
+<li><a href="#informative-references"><span class="toc-section-number">6.1</span> Informative References</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="introduction"><a href="#introduction"><span class="header-section-number">1</span> Introduction</a></h1>
+<p>The <strong>Moving Wall Ontology (MWO)</strong> is a vocabulary to express a limitation to a document service.</p>
+<p>In the real world limitations of document services are often called ‘retention period’, ‘access restriction’ or ‘moving wall’.</p>
+<a id="Status of this document"></a><h2 id="status-of-this-document"><a href="#status-of-this-document"><span class="header-section-number">1.1</span> Status of this document</a></h2>
+<p>This document is an early draft. <a href="https://github.com/cklee/movingwall/issues">Feedback</a> is welcome!</p>
+<a id="Namespaces and Ontology"></a><h2 id="namespaces-and-ontology"><a href="#namespaces-and-ontology"><span class="header-section-number">1.2</span> Namespaces and Ontology</a></h2>
+<p>The URI namespace of this ontology is … The namespace prefix <code>mwo</code> is recommeded. The URI of this ontology as a whole is …</p>
+<pre><code>@prefix mwo: &lt;http://example.org/#&gt; .
+@base        &lt;http://example.org/&gt; .</code></pre>
+<p>The following namspace prefixes are used to refer to related ontologies:</p>
+<pre><code>@prefix dso:  &lt;http://purl.org/ontology/dso#&gt; .
+@prefix ssso: &lt;http://purl.org/ontology/ssso#&gt; .
+@prefix gr:   &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix owl:  &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix vann: &lt;http://purl.org/vocab/vann/&gt; .
+@prefix xs:   &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix dc:   &lt;http://purl.org/dc/elements/1.1/&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .</code></pre>
+<p>The Moving Wall Ontology is defined in RDF/Turtle as following:</p>
+<pre><code>&lt;&gt; a owl:Ontology ;
+    rdfs:label &quot;Moving Wall Ontology (MWO)&quot; ;
+    vann:preferredNamespacePrefix &quot;mwo&quot; ;
+    dc:title &quot;Moving Wall Ontology (MWO)&quot; ;
+    dc:description &quot;A vocabulary to express a limitation to a document service&quot;@en .</code></pre>
+<h1 id="overview"><a href="#overview"><span class="header-section-number">2</span> Overview</a></h1>
+<pre class="ditaa"><code>+-------------------------+                 +------------------------+
+|    ssso:ServiceEvent    |                 | ssso:ServiceLimitation |
+| +---------------------+ |    limitedBy    |   +----------------+   |
+| |                     +----------------------&gt;|                |   |
+| | dso:DocumentService | |                 |   |   MovingWall   |   |
+| |                     | |&lt;----------------|   |                |   |
+| +---------------------+ |   ssso:limits   |   +----------------+   |
+|                         |                 |  gr:QuantitativeValue  |
++-------------------------+                 +------------------------+</code></pre>
+<p>A <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> is a subclass of <a href="http://purl.org/ontology/ssso#ServiceEvent">ssso:ServiceEvent</a> and might be limited through a <a href="#movingwall">MovingWall</a>, which is a subclass of <a href="http://purl.org/ontology/ssso#ServiceLimitation">ssso:ServiceLimitation</a>.</p>
+<p>To state that a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> is limited by a <a href="#movingwall">MovingWall</a> use <a href="http://purl.org/ontology/ssso#limits">ssso:limits</a>.</p>
+<h1 id="classes"><a href="#classes"><span class="header-section-number">3</span> Classes</a></h1>
+<a id="MovingWall"></a><h2 id="movingwall"><a href="#movingwall"><span class="header-section-number">3.1</span> MovingWall</a></h2>
+<p>A <strong>MovingWall</strong> is some obstacle that may limit the use of a <a href="http://purl.org/ontology/ssso#ServiceEvent">ssso:ServiceEvent</a>.</p>
+<p>Instances of <a href="#movingwall">MovingWall</a> must at least participate in a relation with only one of the properties [numVolumes], [numIssues] or [timePeriod].</p>
+<pre><code>mwo:MovingWall a owl:Class ;
+    rdfs:label &quot;moving wall&quot; ;
+    rdfs:comment &quot;A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent&quot;@en ;
+    rdfs:subClassOf ssso:ServiceLimitation ;
+    rdfs:subClassOf [
+        a owl:Class ;
+        owl:intersectionOf (ssso:ServiceLimitation gr:QuantitativeValue)
+    ] .</code></pre>
+<h1 id="properties"><a href="#properties"><span class="header-section-number">4</span> Properties</a></h1>
+<a id="limitedBy"></a><h2 id="limitedby"><a href="#limitedby"><span class="header-section-number">4.1</span> limitedBy</a></h2>
+<p>Relates a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> instance that is <strong>limited by</strong> a <a href="#movingwall">MovingWall</a> instance to this service limitation.</p>
+<p>To relate a <a href="#movingwall">MovingWall</a> to a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> use <a href="http://purl.org/ontology/ssso#limits">ssso:limits</a>.</p>
+<pre><code>mwo:limitedBy a owl:ObjectProperty ;
+    rdfs:label &quot;limited by&quot; ;
+    rdfs:comment &quot;Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation.&quot;@en ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:range mwo:MovingWall ;
+    rdfs:subPropertyOf ssso:limitedBy .</code></pre>
+<a id="hasValue"></a><h2 id="hasvalue"><a href="#hasvalue"><span class="header-section-number">4.2</span> hasValue</a></h2>
+<p>Used to relate a <a href="#movingwall">MovingWall</a> to its quantitative value. <a href="http://purl.org/goodrelations/v1#hasValue">gr:hasValue</a> is defined by <a href="http://purl.org/goodrelations/v1">GoodRelations</a>.</p>
+<pre><code>gr:hasValue a owl:AnnotationProperty , owl:DatatypeProperty ;
+    skos:scopeNote &quot;Used to relate a moving wall to its quantitative value.&quot;@en ;
+    rdfs:isDefinedBy &lt;http://purl.org/goodrelations/v1&gt; .</code></pre>
+<a id="hasUnitOfMeasurement"></a><h2 id="hasunitofmeasurement"><a href="#hasunitofmeasurement"><span class="header-section-number">4.3</span> hasUnitOfMeasurement</a></h2>
+<p>Used to relates a <a href="#movingwall">MovingWall</a> to its unit of measurement. <a href="http://purl.org/goodrelations/v1#hasUnitOfMeasurement">gr:hasUnitOfMeasurement</a> is defined by <a href="http://purl.org/goodrelations/v1">GoodRelations</a>.</p>
+<pre><code>gr:hasUnitOfMeasurement a owl:AnnotationProperty , owl:DatatypeProperty ;
+    skos:scopeNote &quot;Used to relate a moving wall to its quantitative value.&quot;@en ;
+    rdfs:isDefinedBy &lt;http://purl.org/goodrelations/v1&gt; .</code></pre>
+<h1 id="examples"><a href="#examples"><span class="header-section-number">5</span> Examples</a></h1>
+<pre class="example"><code>@prefix mwo: &lt;http://example.org/#&gt; .
+@prefix holding:  &lt;http://example.com/#&gt; .
+@prefix dso:  &lt;http://purl.org/ontology/dso#&gt; .
+@prefix ssso: &lt;http://purl.org/ontology/ssso#&gt; .
+@prefix gr:   &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix bibo: &lt;http://purl.org/ontology/bibo/&gt; .
+@prefix daia: &lt;http://purl.org/ontology/daia/&gt; .
+@prefix dct:  &lt;http://purl.org/dc/terms/&gt; .
+@prefix ecpo: &lt;http://purl.org/ontology/ecpo#&gt; .
+
+# The series is a document, consisting of multliple volumes
+$series a bibo:Periodical 
+    dct:hasPart $volume1, $volume2, $volume3 .
+
+$volume1 a bibo:CollectedDocument ; bibo:volume &quot;1&quot; .
+$volume2 a bibo:CollectedDocument ; bibo:volume &quot;2&quot; .
+$volume3 a bibo:CollectedDocument ; bibo:volume &quot;3&quot; .
+
+# One chapter in Volume 1
+$issue3 a bibo:Document ;
+    dct:date &quot;2000&quot;^^dct:W3CDTF ;
+    dct:isPartOf $volume1 .
+
+# A copy of the full series
+$librarycopies 
+    holding:exemplarOf $series ;
+    holding:heldBy $libray ;
+    ecpo:hasChronology [
+        a ecpo:CurrentChronology ;
+        ecpo:hasBeginVolumeNumbering &quot;1&quot;  ;
+        ecpo:hasBeginIssueNumbering &quot;1&quot;  ;
+        ecpo:hasBeginTemporal &quot;1999&quot; ;
+        dct:extent [ rdf:value &quot;9&quot; ]
+    ] .
+    
+# The latest volume is available for presentation 
+$librarycopies daia:availableFor [
+    a dso:Presentation ;
+    mwo:limitedBy [
+        gr:hasValue &quot;1&quot;^^xs:integer
+        gr:hasUnitOfMeasurement &quot;volume&quot;^^xs:string
+    ]
+] .
+
+# All volumes but the last is available for loan 
+$librarycopies daia:availableFor [
+    a dso:Loan ;
+    mwo:limitedBy [
+        gr:hasValue &quot;-1&quot;^^xs:integer ;
+        gr:hasUnitOfMeasurement &quot;volume&quot;^^xs:string
+    ]
+] .
+
+# The latest 10 issues are available for presentation
+$librarycopies daia:availableFor [
+    a dso:Presentation ;
+    mwo:limitedBy [
+        gr:hasValue &quot;10&quot;^^xs:integer ;
+        gr:hasUnitOfMeasurement &quot;issue&quot;^^xs:string
+    ]
+] .
+
+# All issues but the latest 10 are available for loan. 
+# In this example no issues are currently available for loan because there are only 9 issues in the chronology.
+$librarycopies daia:availableFor [
+    a dso:Loan ;
+    mwo:limitedBy [
+        gr:hasValue &quot;-10&quot;^^xs:integer ;
+        gr:hasUnitOfMeasurement &quot;issue&quot;^^xs:string
+    ]
+] .
+
+# The latest two years are available for presentation. 
+# Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
+$librarycopies daia:availableFor [
+    a dso:Presentation ;
+    mwo:limitedBy [
+        gr:hasValue &quot;P2Y&quot;^^xs:yearMonthDuration
+    ]
+] .
+
+# All issues but within the last two years are available for loan. 
+# Given the current year 2001, all issues before 2000 are available for loan.
+$librarycopies daia:availableFor [
+    a dso:Loan ;
+    mwo:limitedBy [
+        gr:hasValue &quot;-P2Y&quot;^^xs:yearMonthDuration
+    ]
+] .</code></pre>
+<h1 id="references"><a href="#references"><span class="header-section-number">6</span> References</a></h1>
+<a id="Informative References"></a><h2 id="informative-references"><a href="#informative-references"><span class="header-section-number">6.1</span> Informative References</a></h2>
+<ul>
+<li><a href="http://purl.org/ontology/dso">Document Service Ontology</a></li>
+<li><a href="http://purl.org/ontology/ssso">Simple Service Status Ontology (SSSO)</a></li>
+<li><a href="http://purl.org/goodrelations/v1">GoodRelations</a></li>
+<li><a href="http://purl.org/ontology/daia">DAIA Ontology</a></li>
+<li><a href="http://purl.org/ontology/bibo">Bibliographic Ontology</a></li>
+<li><a href="http://purl.org/ontology/ecpo">Enumeration and Chronology of Periodicals Ontology (ECPO)</a></li>
+<li><a href="http://dublincore.org/documents/dcmi-terms/">Dublin Core Metadata Terms</a></li>
+<li><a href="http://www.w3.org/TR/xmlschema-0/">XML Schema</a></li>
+</ul>
+</body>
+</html>

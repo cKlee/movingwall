@@ -1,6 +1,6 @@
 % Moving Wall Ontology (MWO)
 % Carsten Klee (ZDB)
-% 2013-07-25 13:25:12 +0200
+% 2013-07-25 13:35:55 +0200
 
 # Introduction
 
@@ -31,7 +31,6 @@ The following namspace prefixes are used to refer to related ontologies:
 	@prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
 	@prefix dc:   <http://purl.org/dc/elements/1.1/> .
 	@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-	@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 The Moving Wall Ontology is defined in RDF/Turtle as following:
 
