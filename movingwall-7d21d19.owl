@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dso="http://purl.org/ontology/dso#" xmlns:gr="http://purl.org/goodrelations/v1#" xmlns:mwo="http://example.org/#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:ssso="http://purl.org/ontology/ssso#" xmlns:vann="http://purl.org/vocab/vann/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
+  <rdf:Description rdf:about="http://example.org/">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/">
+    <rdfs:label>Moving Wall Ontology (MWO)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/">
+    <vann:preferredNamespacePrefix>mwo</vann:preferredNamespacePrefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/">
+    <dc:title>Moving Wall Ontology (MWO)</dc:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/">
+    <dc:description xml:lang="en">A vocabulary to express a limitation to a document service</dc:description>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="genid1">
+    <rdf:first rdf:resource="http://purl.org/goodrelations/v1#QuantitativeValue"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="genid1">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="genid2">
+    <rdf:first rdf:resource="http://purl.org/ontology/ssso#ServiceLimitation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="genid2">
+    <rdf:rest rdf:nodeID="genid1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="genid3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="genid3">
+    <owl:intersectionOf rdf:nodeID="genid2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#MovingWall">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#MovingWall">
+    <rdfs:label>moving wall</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#MovingWall">
+    <rdfs:comment xml:lang="en">A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#MovingWall">
+    <rdfs:subClassOf rdf:resource="http://purl.org/ontology/ssso#ServiceLimitation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#MovingWall">
+    <rdfs:subClassOf rdf:nodeID="genid3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#limitedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#limitedBy">
+    <rdfs:label>limited by</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#limitedBy">
+    <rdfs:comment xml:lang="en">Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#limitedBy">
+    <rdfs:domain rdf:resource="http://purl.org/ontology/dso#DocumentService"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#limitedBy">
+    <rdfs:range rdf:resource="http://example.org/#MovingWall"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#limitedBy">
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/ssso#limitedBy"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasValue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasValue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasValue">
+    <skos:scopeNote xml:lang="en">Used to relate a moving wall to its quantitative value.</skos:scopeNote>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasValue">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/goodrelations/v1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasUnitOfMeasurement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasUnitOfMeasurement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasUnitOfMeasurement">
+    <skos:scopeNote xml:lang="en">Used to relate a moving wall to its quantitative value.</skos:scopeNote>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/goodrelations/v1#hasUnitOfMeasurement">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/goodrelations/v1"/>
+  </rdf:Description>
+</rdf:RDF>
