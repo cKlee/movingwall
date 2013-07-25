@@ -18,14 +18,16 @@ The URI of this ontology as a whole is ...
 
 The following namspace prefixes are used to refer to related ontologies:
 
-    @prefix dso:  <http://purl.org/ontology/dso#> .
-    @prefix ssso: <http://purl.org/ontology/ssso#> .
-    @prefix gr:   <http://purl.org/goodrelations/v1#> .
-    @prefix owl:  <http://www.w3.org/2002/07/owl#> .
-    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-    @prefix vann: <http://purl.org/vocab/vann/> .
-    @prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
-    @prefix dc:   <http://purl.org/dc/elements/1.1/> .
+	@prefix dso:  <http://purl.org/ontology/dso#> .
+	@prefix ssso: <http://purl.org/ontology/ssso#> .
+	@prefix gr:   <http://purl.org/goodrelations/v1#> .
+	@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+	@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+	@prefix vann: <http://purl.org/vocab/vann/> .
+	@prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
+	@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+	@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+	@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 The Moving Wall Ontology is defined in RDF/Turtle as following:
 
@@ -64,7 +66,7 @@ Instances of [MovingWall] must at least participate in a relation with only one 
 
 	mwo:MovingWall a owl:Class ;
 		rdfs:label "moving wall" ;
-		rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent" ;
+		rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"@en ;
 		rdfs:subClassOf ssso:ServiceLimitation ;
 		rdfs:subClassOf [
 			a owl:Class ;
@@ -83,7 +85,7 @@ To relate a [MovingWall] to a [dso:DocumentService] use [ssso:limits].
 
 	mwo:limitedBy a owl:ObjectProperty ;
 		rdfs:label "limited by" ;
-		rdfs:comment "Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation." ;
+		rdfs:comment "Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation."@en ;
 		rdfs:domain dso:DocumentService ;
 		rdfs:range mwo:MovingWall ;
 		rdfs:subPropertyOf ssso:limitedBy .
@@ -92,27 +94,30 @@ To relate a [MovingWall] to a [dso:DocumentService] use [ssso:limits].
 
 [hasValue]: #hasvalue
 
-Relates a [MovingWall] to its quantitative value. [gr:hasValue] is defined by [GoodRelations].
+Used to relate a [MovingWall] to its quantitative value. [gr:hasValue] is defined by [GoodRelations].
 
-	gr:hasValue a owl:AnnotationProperty ;
-		rdfs:label "has value" ;
-		rdfs:comment "Relates a moving wall to its quantitative value" ;
+	gr:hasValue a owl:AnnotationProperty, owl:DatatypeProperty ;
+		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
 		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 ## hasUnitOfMeasurement
 
 [hasUnitOfMeasurement]: #hasunitofmeasurement
 
-Relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurement] is defined by [GoodRelations].
+Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurement] is defined by [GoodRelations].
 
-	gr:hasUnitOfMeasurement a owl:AnnotationProperty ;
-		rdfs:label "has unit of measurement" ;
-		rdfs:comment "Relates a moving wall to its unit of measurement." ;
+	gr:hasUnitOfMeasurement a owl:AnnotationProperty, owl:DatatypeProperty ;
+		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
 		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 # Examples
 
 ``` {.example}
+@prefix mwo: <http://example.org/#> .
+@prefix holding:  <http://example.com/#> .
+@prefix dso:  <http://purl.org/ontology/dso#> .
+@prefix ssso: <http://purl.org/ontology/ssso#> .
+@prefix gr:   <http://purl.org/goodrelations/v1#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix daia: <http://purl.org/ontology/daia/> .
 @prefix dct:  <http://purl.org/dc/terms/> .
