@@ -206,7 +206,6 @@ $librarycopies daia:availableFor [
 		gr:hasValue "-P2Y"^^xs:yearMonthDuration
 	]
 ] .
-
 ```
 
 # References
