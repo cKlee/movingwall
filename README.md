@@ -1,4 +1,4 @@
 movingwall
 ==========
 
-An ontology to describe retention period of items
+A vocabulary to express a limitation to a document service
