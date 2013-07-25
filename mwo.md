@@ -96,8 +96,8 @@ To relate a [MovingWall] to a [dso:DocumentService] use [ssso:limits].
 
 Used to relate a [MovingWall] to its quantitative value. [gr:hasValue] is defined by [GoodRelations].
 
-	gr:hasValue rdf:type owl:AnnotationProperty , owl:DatatypeProperty ;
-		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
+	gr:hasValue a owl:AnnotationProperty , owl:DatatypeProperty ;
+		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
 		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 ## hasUnitOfMeasurement
@@ -106,8 +106,8 @@ Used to relate a [MovingWall] to its quantitative value. [gr:hasValue] is define
 
 Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurement] is defined by [GoodRelations].
 
-	gr:hasUnitOfMeasurement rdf:type owl:AnnotationProperty , owl:DatatypeProperty ;
-		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
+	gr:hasUnitOfMeasurement a owl:AnnotationProperty , owl:DatatypeProperty ;
+		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
 		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 # Examples
