@@ -29,9 +29,9 @@ mwo:limitedBy a owl:ObjectProperty ;
     rdfs:domain dso:DocumentService ;
     rdfs:range mwo:MovingWall ;
     rdfs:subPropertyOf ssso:limitedBy .
-gr:hasValue rdf:type owl:AnnotationProperty , owl:DatatypeProperty ;
-    skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
+gr:hasValue a owl:AnnotationProperty , owl:DatatypeProperty ;
+    skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
     rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
-gr:hasUnitOfMeasurement rdf:type owl:AnnotationProperty , owl:DatatypeProperty ;
-    skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
+gr:hasUnitOfMeasurement a owl:AnnotationProperty , owl:DatatypeProperty ;
+    skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
     rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
