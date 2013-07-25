@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Carsten Klee (ZDB)" />
-  <meta name="date" content="2013-07-24 16:24:03 +0200" />
+  <meta name="date" content="2013-07-25 13:11:27 +0200" />
   <title>Moving Wall Ontology (MWO)</title>
    <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -53,7 +53,7 @@
 <header>
 <h1 class="title">Moving Wall Ontology (MWO)</h1>
 <h3 class="author">Carsten Klee (ZDB)</h3>
-<h4 class="date">2013-07-24 16:24:03 +0200</h4>
+<h4 class="date">2013-07-25 13:11:27 +0200</h4>
 </header>
 
 <h1>Table of Contents</h1>
@@ -95,7 +95,9 @@
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 @prefix vann: &lt;http://purl.org/vocab/vann/&gt; .
 @prefix xs:   &lt;http://www.w3.org/2001/XMLSchema#&gt; .
-@prefix dc:   &lt;http://purl.org/dc/elements/1.1/&gt; .</code></pre>
+@prefix dc:   &lt;http://purl.org/dc/elements/1.1/&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+@prefix rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .</code></pre>
 <p>The Moving Wall Ontology is defined in RDF/Turtle as following:</p>
 <pre><code>&lt;&gt; a owl:Ontology ;
     rdfs:label &quot;Moving Wall Ontology (MWO)&quot; ;
@@ -120,7 +122,7 @@
 <p>Instances of <a href="#movingwall">MovingWall</a> must at least participate in a relation with only one of the properties [numVolumes], [numIssues] or [timePeriod].</p>
 <pre><code>mwo:MovingWall a owl:Class ;
     rdfs:label &quot;moving wall&quot; ;
-    rdfs:comment &quot;A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent&quot; ;
+    rdfs:comment &quot;A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent&quot;@en ;
     rdfs:subClassOf ssso:ServiceLimitation ;
     rdfs:subClassOf [
         a owl:Class ;
@@ -132,24 +134,27 @@
 <p>To relate a <a href="#movingwall">MovingWall</a> to a <a href="http://purl.org/ontology/dso#DocumentService">dso:DocumentService</a> use <a href="http://purl.org/ontology/ssso#limits">ssso:limits</a>.</p>
 <pre><code>mwo:limitedBy a owl:ObjectProperty ;
     rdfs:label &quot;limited by&quot; ;
-    rdfs:comment &quot;Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation.&quot; ;
+    rdfs:comment &quot;Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation.&quot;@en ;
     rdfs:domain dso:DocumentService ;
     rdfs:range mwo:MovingWall ;
     rdfs:subPropertyOf ssso:limitedBy .</code></pre>
 <a id="hasValue"></a><h2 id="hasvalue"><a href="#hasvalue"><span class="header-section-number">4.2</span> hasValue</a></h2>
-<p>Relates a <a href="#movingwall">MovingWall</a> to its quantitative value. <a href="http://purl.org/goodrelations/v1#hasValue">gr:hasValue</a> is defined by <a href="http://purl.org/goodrelations/v1">GoodRelations</a>.</p>
-<pre><code>gr:hasValue a owl:AnnotationProperty ;
-    rdfs:label &quot;has value&quot; ;
-    rdfs:comment &quot;Relates a moving wall to its quantitative value&quot; ;
+<p>Used to relate a <a href="#movingwall">MovingWall</a> to its quantitative value. <a href="http://purl.org/goodrelations/v1#hasValue">gr:hasValue</a> is defined by <a href="http://purl.org/goodrelations/v1">GoodRelations</a>.</p>
+<pre><code>gr:hasValue a owl:AnnotationProperty, owl:DatatypeProperty ;
+    skos:scopeNote &quot;Used to relate a moving wall to its quantitative value.&quot;@en .
     rdfs:isDefinedBy &lt;http://purl.org/goodrelations/v1&gt; .</code></pre>
 <a id="hasUnitOfMeasurement"></a><h2 id="hasunitofmeasurement"><a href="#hasunitofmeasurement"><span class="header-section-number">4.3</span> hasUnitOfMeasurement</a></h2>
-<p>Relates a <a href="#movingwall">MovingWall</a> to its unit of measurement. <a href="http://purl.org/goodrelations/v1#hasUnitOfMeasurement">gr:hasUnitOfMeasurement</a> is defined by <a href="http://purl.org/goodrelations/v1">GoodRelations</a>.</p>
-<pre><code>gr:hasUnitOfMeasurement a owl:AnnotationProperty ;
-    rdfs:label &quot;has unit of measurement&quot; ;
-    rdfs:comment &quot;Relates a moving wall to its unit of measurement.&quot; ;
+<p>Used to relates a <a href="#movingwall">MovingWall</a> to its unit of measurement. <a href="http://purl.org/goodrelations/v1#hasUnitOfMeasurement">gr:hasUnitOfMeasurement</a> is defined by <a href="http://purl.org/goodrelations/v1">GoodRelations</a>.</p>
+<pre><code>gr:hasUnitOfMeasurement a owl:AnnotationProperty, owl:DatatypeProperty ;
+    skos:scopeNote &quot;Used to relate a moving wall to its quantitative value.&quot;@en .
     rdfs:isDefinedBy &lt;http://purl.org/goodrelations/v1&gt; .</code></pre>
 <h1 id="examples"><a href="#examples"><span class="header-section-number">5</span> Examples</a></h1>
-<pre class="example"><code>@prefix bibo: &lt;http://purl.org/ontology/bibo/&gt; .
+<pre class="example"><code>@prefix mwo: &lt;http://example.org/#&gt; .
+@prefix holding:  &lt;http://example.com/#&gt; .
+@prefix dso:  &lt;http://purl.org/ontology/dso#&gt; .
+@prefix ssso: &lt;http://purl.org/ontology/ssso#&gt; .
+@prefix gr:   &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix bibo: &lt;http://purl.org/ontology/bibo/&gt; .
 @prefix daia: &lt;http://purl.org/ontology/daia/&gt; .
 @prefix dct:  &lt;http://purl.org/dc/terms/&gt; .
 @prefix ecpo: &lt;http://purl.org/ontology/ecpo#&gt; .
