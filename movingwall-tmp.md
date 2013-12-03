@@ -14,7 +14,7 @@ This document is an early draft. [Feedback](https://github.com/dini-ag-kim/movin
 
 ## Namespaces and Ontology
 
-The URI namespace of this ontology is ... The namespace prefix `mwo` is recommeded.
+The URI namespace of this ontology is ... The namespace prefix `mwo` is recommended.
 The URI of this ontology as a whole is ...
 
     @prefix mwo: <http://example.org/#> .
@@ -107,7 +107,7 @@ Used to relate a [MovingWall] to its quantitative value. [gr:hasValue] is define
 
 [hasUnitOfMeasurement]: #hasunitofmeasurement
 
-Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurement] is defined by [GoodRelations].
+Used to relate a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurement] is defined by [GoodRelations].
 
 	gr:hasUnitOfMeasurement a owl:AnnotationProperty , owl:DatatypeProperty ;
 		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
