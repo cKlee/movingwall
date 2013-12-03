@@ -1,7 +1,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix mwo: <http://example.org/#> .
 @prefix dso: <http://purl.org/ontology/dso#> .
-@prefix ssso: <http://purl.org/ontology/ssso#> .
+@prefix service: <http://purl.org/ontology/service#> .
 @prefix gr: <http://purl.org/goodrelations/v1#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -19,22 +19,14 @@
 
 mwo:MovingWall
     a owl:Class ;
-    rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"@en ;
+    rdfs:comment "A moving wall is some obstacle that may limit the use of a service:Service"@en ;
     rdfs:label "moving wall" ;
-    rdfs:subClassOf ssso:ServiceLimitation, [
+    rdfs:subClassOf [
         a owl:Class ;
-        owl:intersectionOf (ssso:ServiceLimitation
+        owl:intersectionOf (service:ServiceLimitation
             gr:QuantitativeValue
         )
     ] .
-
-mwo:limitedBy
-    a owl:ObjectProperty ;
-    rdfs:comment "Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation."@en ;
-    rdfs:domain dso:DocumentService ;
-    rdfs:label "limited by" ;
-    rdfs:range mwo:MovingWall ;
-    rdfs:subPropertyOf ssso:limitedBy .
 
 gr:hasUnitOfMeasurement
     a owl:AnnotationProperty, owl:DatatypeProperty ;
@@ -45,4 +37,10 @@ gr:hasValue
     a owl:AnnotationProperty, owl:DatatypeProperty ;
     rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
     skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
+
+service:limitedBy
+    a owl:AnnotationProperty, owl:ObjectProperty ;
+    rdfs:isDefinedBy <http://purl.org/ontology/service> ;
+    rdfs:label "limited by" ;
+    skos:scopeNote "Used to relate a service:Service instance that is limited by a moving wall instance to this service limitation."@en .
 
