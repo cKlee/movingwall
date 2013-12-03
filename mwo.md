@@ -106,6 +106,7 @@ Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurem
 
 # Examples
 ## Moving Wall and document service
+
 ``` {.example}
 @prefix mwo: <http://example.org/#> .
 @prefix holding:  <http://example.com/#> .
@@ -204,8 +205,10 @@ $librarycopies daia:availableFor [
     ]
 ] .
 ```
+
 ## Moving Wall and other services
-```
+
+```{.example}
 $exampleService a ex:CoffeForFree ;
     service:limitedBy [
         a mwo:MovingWall ;
