@@ -229,7 +229,7 @@ $PreviewGoogleBook daia:availableFor [
 ## Informative References
 
 * [Document Service Ontology]
-* [Simple Service Status Ontology (SSSO)]
+* [Service Ontology]
 * [GoodRelations]
 * [DAIA Ontology]
 * [Bibliographic Ontology]
