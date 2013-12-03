@@ -59,11 +59,11 @@ To state that a [service:Service] is limited by a [MovingWall] use [service:limi
 
 [MovingWall]: #movingwall
 
-A **moving wall** is some obstacle that may limit the use of a [ssso:ServiceEvent]. 
+A **moving wall** is some obstacle that may limit the use of a [service:Service]. 
 
     mwo:MovingWall a owl:Class ;
         rdfs:label "moving wall" ;
-        rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"@en ;
+        rdfs:comment "A moving wall is some obstacle that may limit the use of a service:Service"@en ;
         rdfs:subClassOf [
             a owl:Class ;
             owl:intersectionOf (service:ServiceLimitation gr:QuantitativeValue)
@@ -79,10 +79,10 @@ Used to relate a [service:Service] instance that is **limited by** a [MovingWall
 
 To relate a [MovingWall] to a [dso:DocumentService] use [service:limits]. [service:limits] is defined by the [Service Ontology].
 
-	ssso:limitedBy a owl:AnnotationProperty , owl:ObjectProperty ;
-		rdfs:label "limited by" ;
-		skos:scopeNote "Used to relate a service:Service instance that is limited by a moving wall instance to this service limitation."@en ;
-		rdfs:isDefinedBy <http://purl.org/ontology/service> .
+    service:limitedBy a owl:AnnotationProperty , owl:ObjectProperty ;
+        rdfs:label "limited by" ;
+        skos:scopeNote "Used to relate a service:Service instance that is limited by a moving wall instance to this service limitation."@en ;
+        rdfs:isDefinedBy <http://purl.org/ontology/service> .
 
 ## hasValue
 
@@ -90,9 +90,9 @@ To relate a [MovingWall] to a [dso:DocumentService] use [service:limits]. [servi
 
 Used to relate a [MovingWall] to its quantitative value. [gr:hasValue] is defined by [GoodRelations].
 
-	gr:hasValue a owl:AnnotationProperty , owl:DatatypeProperty ;
-		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
-		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
+    gr:hasValue a owl:AnnotationProperty , owl:DatatypeProperty ;
+        skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
+        rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 ## hasUnitOfMeasurement
 
@@ -100,9 +100,9 @@ Used to relate a [MovingWall] to its quantitative value. [gr:hasValue] is define
 
 Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurement] is defined by [GoodRelations].
 
-	gr:hasUnitOfMeasurement a owl:AnnotationProperty , owl:DatatypeProperty ;
-		skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
-		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
+    gr:hasUnitOfMeasurement a owl:AnnotationProperty , owl:DatatypeProperty ;
+        skos:scopeNote "Used to relate a moving wall to its quantitative value."@en ;
+        rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 # Examples
 ## Moving Wall and document service
@@ -110,7 +110,7 @@ Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurem
 @prefix mwo: <http://example.org/#> .
 @prefix holding:  <http://example.com/#> .
 @prefix dso:  <http://purl.org/ontology/dso#> .
-@prefix ssso: <http://purl.org/ontology/ssso#> .
+@prefix service: <http://purl.org/ontology/service#> .
 @prefix gr:   <http://purl.org/goodrelations/v1#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix daia: <http://purl.org/ontology/daia/> .
@@ -120,7 +120,7 @@ Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurem
 
 # The series is a document, consisting of multliple volumes
 $series a bibo:Periodical 
-	dct:hasPart $volume1, $volume2, $volume3 .
+    dct:hasPart $volume1, $volume2, $volume3 .
 
 $volume1 a bibo:CollectedDocument ; bibo:volume "1" .
 $volume2 a bibo:CollectedDocument ; bibo:volume "2" .
@@ -128,90 +128,98 @@ $volume3 a bibo:CollectedDocument ; bibo:volume "3" .
 
 # One chapter in Volume 1
 $issue3 a bibo:Document ;
-	dct:date "2000"^^dct:W3CDTF ;
-	dct:isPartOf $volume1 .
+    dct:date "2000"^^dct:W3CDTF ;
+    dct:isPartOf $volume1 .
 
 # A copy of the full series
 $librarycopies 
-	holding:exemplarOf $series ;
-	holding:heldBy $libray ;
-	ecpo:hasChronology [
-		a ecpo:CurrentChronology ;
-		ecpo:hasBeginVolumeNumbering "1"  ;
-		ecpo:hasBeginIssueNumbering "1"  ;
-		ecpo:hasBeginTemporal "1999" ;
-		dct:extent [ rdf:value "9" ]
-	] .
-	
+    holding:exemplarOf $series ;
+    holding:heldBy $libray ;
+    ecpo:hasChronology [
+        a ecpo:CurrentChronology ;
+        ecpo:hasBeginVolumeNumbering "1"  ;
+        ecpo:hasBeginIssueNumbering "1"  ;
+        ecpo:hasBeginTemporal "1999" ;
+        dct:extent [ rdf:value "9" ]
+    ] .
+    
 # The latest volume is available for presentation 
 $librarycopies daia:availableFor [
-	a dso:Presentation ;
-	ssso:limitedBy [
-		a mwo:MovingWall ;
-		gr:hasValue "1"^^xs:integer
-		gr:hasUnitOfMeasurement "volume"^^xs:string
-	]
+    a dso:Presentation ;
+    service:limitedBy [
+        a mwo:MovingWall ;
+        gr:hasValue "1"^^xs:integer
+        gr:hasUnitOfMeasurement "volume"^^xs:string
+    ]
 ] .
 
 # All volumes but the last is available for loan 
 $librarycopies daia:availableFor [
-	a dso:Loan ;
-	ssso:limitedBy [
-		a mwo:MovingWall ;
-		gr:hasValue "-1"^^xs:integer ;
-		gr:hasUnitOfMeasurement "volume"^^xs:string
-	]
+    a dso:Loan ;
+    service:limitedBy [
+        a mwo:MovingWall ;
+        gr:hasValue "-1"^^xs:integer ;
+        gr:hasUnitOfMeasurement "volume"^^xs:string
+    ]
 ] .
 
 # The latest 10 issues are available for presentation
 $librarycopies daia:availableFor [
-	a dso:Presentation ;
-	ssso:limitedBy [
-		a mwo:MovingWall ;
-		gr:hasValue "10"^^xs:integer ;
-		gr:hasUnitOfMeasurement "issue"^^xs:string
-	]
+    a dso:Presentation ;
+    service:limitedBy [
+        a mwo:MovingWall ;
+        gr:hasValue "10"^^xs:integer ;
+        gr:hasUnitOfMeasurement "issue"^^xs:string
+    ]
 ] .
 
 # All issues but the latest 10 are available for loan. 
 # In this example no issues are currently available for loan because there are only 9 issues in the chronology.
 $librarycopies daia:availableFor [
-	a dso:Loan ;
-	ssso:limitedBy [
-		a mwo:MovingWall ;
-		gr:hasValue "-10"^^xs:integer ;
-		gr:hasUnitOfMeasurement "issue"^^xs:string
-	]
+    a dso:Loan ;
+    service:limitedBy [
+        a mwo:MovingWall ;
+        gr:hasValue "-10"^^xs:integer ;
+        gr:hasUnitOfMeasurement "issue"^^xs:string
+    ]
 ] .
 
 # The latest two years are available for presentation. 
 # Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
 $librarycopies daia:availableFor [
-	a dso:Presentation ;
-	ssso:limitedBy [
-		a mwo:MovingWall ;
-		gr:hasValue "P2Y"^^xs:yearMonthDuration
-	]
+    a dso:Presentation ;
+    service:limitedBy [
+        a mwo:MovingWall ;
+        gr:hasValue "P2Y"^^xs:yearMonthDuration
+    ]
 ] .
 
 # All issues but within the last two years are available for loan. 
 # Given the current year 2001, all issues after the year 2000 are not available for loan.
 $librarycopies daia:availableFor [
-	a dso:Loan ;
-	ssso:limitedBy [
-		a mwo:MovingWall ;
-		gr:hasValue "-P2Y"^^xs:yearMonthDuration
-	]
+    a dso:Loan ;
+    service:limitedBy [
+        a mwo:MovingWall ;
+        gr:hasValue "-P2Y"^^xs:yearMonthDuration
+    ]
 ] .
 ```
 ## Moving Wall and other services
 ```
 $exampleService a ex:CoffeForFree ;
-	ssso:limitedBy [
-		a mwo:MovingWall ;
-		gr:hasValue "1"^^xs:integer ;
-		gr:hasUnitOfMeasurement "cup"^^xs:string
-	] .
+    service:limitedBy [
+        a mwo:MovingWall ;
+        gr:hasValue "1"^^xs:integer ;
+        gr:hasUnitOfMeasurement "cup"^^xs:string
+    ] .
+    
+$PreviewGoogleBook daia:availableFor [
+    a dso:Presentation ;
+    mwo:limitedBy [
+        gr:hasValue "5"^^xs:integer ;
+        gr:hasUnitOfMeasurement "page"^^xs:string
+    ]
+] .
 ```
 # References
 
