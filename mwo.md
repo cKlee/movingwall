@@ -1,8 +1,8 @@
 # Introduction
 
-The **Moving Wall Ontology (MWO)** is a vocabulary to express a limitation to a document service.
+The **Moving Wall Ontology (MWO)** is a vocabulary to express a quantitative limitation to a service event.
 
-In the real world limitations of document services are often called 'retention period', 'access restriction' or 'moving wall'.
+In the real world limitations of document services are often called 'retention period', 'access restriction' or 'moving wall'. This Vocabulary aims to be used in conjunction with document services, but it might be used with other services too.
 
 ## Status of this document
 
@@ -19,7 +19,7 @@ The URI of this ontology as a whole is ...
 The following namspace prefixes are used to refer to related ontologies:
 
 	@prefix dso:  <http://purl.org/ontology/dso#> .
-	@prefix ssso: <http://purl.org/ontology/ssso#> .
+	@prefix service: <http://purl.org/ontology/service#> .
 	@prefix gr:   <http://purl.org/goodrelations/v1#> .
 	@prefix owl:  <http://www.w3.org/2002/07/owl#> .
 	@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -38,20 +38,20 @@ The Moving Wall Ontology is defined in RDF/Turtle as following:
 
 # Overview
 ``` {.ditaa}
-+-------------------------+                 +------------------------+
-|    ssso:ServiceEvent    |                 | ssso:ServiceLimitation |
-| +---------------------+ |    limitedBy    |   +----------------+   |
-| |                     +---------------------->|                |   |
-| | dso:DocumentService | |                 |   |   MovingWall   |   |
-| |                     | |<----------------|   |                |   |
-| +---------------------+ |   ssso:limits   |   +----------------+   |
-|                         |                 |  gr:QuantitativeValue  |
-+-------------------------+                 +------------------------+
+                                             +---------------------------+
+                                             | service:ServiceLimitation |
++-------------------+                        |    +----------------+     |
+|                   +---service:limitedBy--->|    |                |     |
+|  service:Service  |                        |    |   MovingWall   |     |
+|                   |<---service:limits------+    |                |     |
++-------------------+                        |    +----------------+     |
+                                             |   gr:QuantitativeValue    |
+                                             +---------------------------+
 ```
 
-A [dso:DocumentService] is a subclass of [ssso:ServiceEvent] and might be limited through a [MovingWall], which is a subclass of [ssso:ServiceLimitation].
+A [service:Service] might be limited by a [MovingWall], which is a intersection of [service:ServiceLimitation] and [gr:QuantitativeValue].
 
-To state that a [dso:DocumentService] is limited by a [MovingWall] use [ssso:limits].
+To state that a [service:Service] is limited by a [MovingWall] use [service:limits].
 
 # Classes
 
@@ -59,18 +59,15 @@ To state that a [dso:DocumentService] is limited by a [MovingWall] use [ssso:lim
 
 [MovingWall]: #movingwall
 
-A **MovingWall** is some obstacle that may limit the use of a [ssso:ServiceEvent]. 
+A **moving wall** is some obstacle that may limit the use of a [ssso:ServiceEvent]. 
 
-Instances of [MovingWall] must at least participate in a relation with only one of the properties [numVolumes], [numIssues] or [timePeriod].
-
-	mwo:MovingWall a owl:Class ;
-		rdfs:label "moving wall" ;
-		rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"@en ;
-		rdfs:subClassOf ssso:ServiceLimitation ;
-		rdfs:subClassOf [
-			a owl:Class ;
-			owl:intersectionOf (ssso:ServiceLimitation gr:QuantitativeValue)
-		] .
+    mwo:MovingWall a owl:Class ;
+        rdfs:label "moving wall" ;
+        rdfs:comment "A moving wall is some obstacle that may limit the use of a ssso:ServiceEvent"@en ;
+        rdfs:subClassOf [
+            a owl:Class ;
+            owl:intersectionOf (service:ServiceLimitation gr:QuantitativeValue)
+        ] .
 
 # Properties
 
@@ -78,16 +75,14 @@ Instances of [MovingWall] must at least participate in a relation with only one 
 
 [limitedBy]: #limitedBy
 
-Relates a [dso:DocumentService] instance that is **limited by** a [MovingWall] instance to this service limitation.
+Used to relate a [service:Service] instance that is **limited by** a [MovingWall] instance to this service limitation.
 
-To relate a [MovingWall] to a [dso:DocumentService] use [ssso:limits].
+To relate a [MovingWall] to a [dso:DocumentService] use [service:limits]. [service:limits] is defined by the [Service Ontology].
 
-	mwo:limitedBy a owl:ObjectProperty ;
+	ssso:limitedBy a owl:AnnotationProperty , owl:ObjectProperty ;
 		rdfs:label "limited by" ;
-		rdfs:comment "Relates a dso:DocumentService instance that is limited by a moving wall instance to this service limitation."@en ;
-		rdfs:domain dso:DocumentService ;
-		rdfs:range mwo:MovingWall ;
-		rdfs:subPropertyOf ssso:limitedBy .
+		skos:scopeNote "Used to relate a service:Service instance that is limited by a moving wall instance to this service limitation."@en ;
+		rdfs:isDefinedBy <http://purl.org/ontology/service> .
 
 ## hasValue
 
@@ -110,7 +105,7 @@ Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurem
 		rdfs:isDefinedBy <http://purl.org/goodrelations/v1> .
 
 # Examples
-
+## Moving Wall and document service
 ``` {.example}
 @prefix mwo: <http://example.org/#> .
 @prefix holding:  <http://example.com/#> .
@@ -121,6 +116,7 @@ Used to relates a [MovingWall] to its unit of measurement. [gr:hasUnitOfMeasurem
 @prefix daia: <http://purl.org/ontology/daia/> .
 @prefix dct:  <http://purl.org/dc/terms/> .
 @prefix ecpo: <http://purl.org/ontology/ecpo#> .
+@prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
 
 # The series is a document, consisting of multliple volumes
 $series a bibo:Periodical 
@@ -150,7 +146,8 @@ $librarycopies
 # The latest volume is available for presentation 
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	mwo:limitedBy [
+	ssso:limitedBy [
+		a mwo:MovingWall ;
 		gr:hasValue "1"^^xs:integer
 		gr:hasUnitOfMeasurement "volume"^^xs:string
 	]
@@ -159,7 +156,8 @@ $librarycopies daia:availableFor [
 # All volumes but the last is available for loan 
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	mwo:limitedBy [
+	ssso:limitedBy [
+		a mwo:MovingWall ;
 		gr:hasValue "-1"^^xs:integer ;
 		gr:hasUnitOfMeasurement "volume"^^xs:string
 	]
@@ -168,7 +166,8 @@ $librarycopies daia:availableFor [
 # The latest 10 issues are available for presentation
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	mwo:limitedBy [
+	ssso:limitedBy [
+		a mwo:MovingWall ;
 		gr:hasValue "10"^^xs:integer ;
 		gr:hasUnitOfMeasurement "issue"^^xs:string
 	]
@@ -178,7 +177,8 @@ $librarycopies daia:availableFor [
 # In this example no issues are currently available for loan because there are only 9 issues in the chronology.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	mwo:limitedBy [
+	ssso:limitedBy [
+		a mwo:MovingWall ;
 		gr:hasValue "-10"^^xs:integer ;
 		gr:hasUnitOfMeasurement "issue"^^xs:string
 	]
@@ -188,21 +188,31 @@ $librarycopies daia:availableFor [
 # Given the current year 2001, in this example all issues before the year 2000 are not avaialable for  presentation. 
 $librarycopies daia:availableFor [
 	a dso:Presentation ;
-	mwo:limitedBy [
+	ssso:limitedBy [
+		a mwo:MovingWall ;
 		gr:hasValue "P2Y"^^xs:yearMonthDuration
 	]
 ] .
 
 # All issues but within the last two years are available for loan. 
-# Given the current year 2001, all issues before 2000 are available for loan.
+# Given the current year 2001, all issues after the year 2000 are not available for loan.
 $librarycopies daia:availableFor [
 	a dso:Loan ;
-	mwo:limitedBy [
+	ssso:limitedBy [
+		a mwo:MovingWall ;
 		gr:hasValue "-P2Y"^^xs:yearMonthDuration
 	]
 ] .
 ```
-
+## Moving Wall and other services
+```
+$exampleService a ex:CoffeForFree ;
+	ssso:limitedBy [
+		a mwo:MovingWall ;
+		gr:hasValue "1"^^xs:integer ;
+		gr:hasUnitOfMeasurement "cup"^^xs:string
+	] .
+```
 # References
 
 ## Informative References
@@ -221,15 +231,16 @@ $librarycopies daia:availableFor [
 [dso:Loan]: http://purl.org/ontology/dso#Loan
 [dso:Presentation]: http://purl.org/ontology/dso#Presentation
 
-[Simple Service Status Ontology (SSSO)]: http://purl.org/ontology/ssso
-[ssso:limits]: http://purl.org/ontology/ssso#limits 
-[ssso:limitedBy]: http://purl.org/ontology/ssso#limitedBy
-[ssso:ServiceEvent]: http://purl.org/ontology/ssso#ServiceEvent
-[ssso:ServiceLimitation]: http://purl.org/ontology/ssso#ServiceLimitation
+[Service Ontology]: http://purl.org/ontology/service
+[service:limits]: http://purl.org/ontology/service#limits 
+[service:limitedBy]: http://purl.org/ontology/service#limitedBy
+[service:Service]: http://purl.org/ontology/service#Service
+[service:ServiceLimitation]: http://purl.org/ontology/service#ServiceLimitation
 
 [GoodRelations]: http://purl.org/goodrelations/v1
 [gr:hasValue]: http://purl.org/goodrelations/v1#hasValue
 [gr:hasUnitOfMeasurement]: http://purl.org/goodrelations/v1#hasUnitOfMeasurement
+[gr:QuantitativeValue]: http://purl.org/goodrelations/v1#QuantitativeValue
 
 [DAIA Ontology]: http://purl.org/ontology/daia
 [daia:availableFor]: http://purl.org/ontology/daia/availableFor 
