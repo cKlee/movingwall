@@ -13,8 +13,8 @@ This document is an early draft. [Feedback](https://github.com/dini-ag-kim/movin
 The URI namespace of this ontology is ... The namespace prefix `mwo` is recommeded.
 The URI of this ontology as a whole is ...
 
-    @prefix mwo: <http://example.org/#> .
-    @base        <http://example.org/> .
+    @prefix mwo: <https://w3id.org/mwo#> .
+    @base        <https://w3id.org/mwo> .
 
 The following namspace prefixes are used to refer to related ontologies:
 
