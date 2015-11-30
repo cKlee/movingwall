@@ -5,6 +5,6 @@ FORMATS = ttl owl
 TITLE = Moving Wall Ontology (MWO)
 AUTHOR = Carsten Klee (ZDB)
 HTML_ARGS += --css code-box.css
-HTML_CSS = code-box.cs
+HTML_CSS = code-box.css
 
 include makespec/Makefile
