@@ -1,8 +1,8 @@
 NAME = movingwall
 SOURCE = mwo.md
-GITHUB = https://github.com/cKlee/movingwall/
+GITHUB = http://dini-ag-kim.github.io/movingwall/
 FORMATS = ttl owl
-TITLE = Moving Wall Ontology (
+TITLE = Moving Wall Ontology (MWO)
 AUTHOR = Carsten Klee (ZDB)
 REVISIONS = 5
 
