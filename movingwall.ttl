@@ -1,46 +1,43 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix mwo: <http://example.org/#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix daia: <http://purl.org/ontology/daia/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix dso: <http://purl.org/ontology/dso#> .
-@prefix service: <http://purl.org/ontology/service#> .
-@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix ecpo: <http://purl.org/ontology/ecpo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://example.org/>
-    dc:description "A vocabulary to express a limitation to a document service"@en ;
-    dc:title "Moving Wall Ontology (MWO)" ;
     vann:preferredNamespacePrefix "mwo" ;
     a owl:Ontology ;
     rdfs:label "Moving Wall Ontology (MWO)" .
 
-mwo:MovingWall
+mwo:excludedTime
+    a owl:DatatypeProperty ;
+    rdfs:comment "A part of the document expressed through a period of time which is excluded from the DocumentService." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:label "excluded time" ;
+    rdfs:range xsd:duration .
+
+mwo:numIssues
+    a owl:DatatypeProperty ;
+    rdfs:comment "The number of issues that are included in or excluded from the DocumentService." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:label "number of issues" ;
+    rdfs:range xsd:integer .
+
+mwo:numVolumes
+    a owl:DatatypeProperty ;
+    rdfs:comment "The number of volumes that are included in or excluded from the DocumentService." ;
+    rdfs:domain dso:DocumentService ;
+    rdfs:label "number of volumes" ;
+    rdfs:range xsd:integer .
+
+dso:DocumentService
     a owl:Class ;
-    rdfs:comment "A moving wall is some obstacle that may limit the use of a service:Service"@en ;
-    rdfs:label "moving wall" ;
-    rdfs:subClassOf [
-        a owl:Class ;
-        owl:intersectionOf (service:ServiceLimitation
-            gr:QuantitativeValue
-        )
-    ] .
-
-gr:hasUnitOfMeasurement
-    a owl:AnnotationProperty, owl:DatatypeProperty ;
-    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
-    skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
-
-gr:hasValue
-    a owl:AnnotationProperty, owl:DatatypeProperty ;
-    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
-    skos:scopeNote "Used to relate a moving wall to its quantitative value."@en .
-
-service:limitedBy
-    a owl:AnnotationProperty, owl:ObjectProperty ;
-    rdfs:isDefinedBy <http://purl.org/ontology/service> ;
-    rdfs:label "limited by" ;
-    skos:scopeNote "Used to relate a service:Service instance that is limited by a moving wall instance to this service limitation."@en .
+    rdfs:isDefinedBy <http://purl.org/ontology/dso> ;
+    rdfs:label "DocumentService" .
 
